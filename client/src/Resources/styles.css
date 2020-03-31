@@ -255,10 +255,8 @@ header {
 header .logo {
     font-family: 'Monoton', cursive;
     color: #050505;
-    font-size: 20px;
-    
-    height: 100px;
-    position: absolute;
+    height: 180px;
+    position : absolute;
     
 }
 
@@ -729,8 +727,8 @@ footer .business_nfo .nfo {
 
 .register_login_container {
     display: flex;
-    border: 1px solid #999592;
-    border-top: 5px solid #999592;
+    border: 5px solid black;
+    border-top: 5px solid black;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 80px 0px 110px 0px;
@@ -740,13 +738,14 @@ footer .business_nfo .nfo {
 
 .register_login_container .left,
 .register_login_container .right {
-    flex:1
+    flex:1;
+    
 }
 
 .register_login_container h2 {
     margin: 20px 0px;
     text-transform: uppercase;
-    color: #686868;
+    color:black;
 }
 
 .register_login_container p{
