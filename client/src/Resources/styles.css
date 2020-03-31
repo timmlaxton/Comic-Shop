@@ -250,11 +250,16 @@ header {
     border-bottom: 1px solid white;
 }
 
+
+
 header .logo {
     font-family: 'Monoton', cursive;
     color: #050505;
-    font-size: 30px;
-    padding: 8px 0px;
+    font-size: 20px;
+    
+    height: 100px;
+    position: absolute;
+    
 }
 
 header a {

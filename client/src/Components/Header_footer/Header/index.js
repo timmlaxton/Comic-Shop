@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import logo from '../../../images/logo.png';
 
 class Header extends Component {
     render() {
@@ -6,8 +7,9 @@ class Header extends Component {
             <header className="bck_b_light">
                 <div className="container">
                     <div className="left">
+                        <img src={logo} alt="Logo" className="logo"/>
                         <div className="logo">
-                        City Centre Comics
+                        
                             </div>
                                 </div>
                                     <div className="right">
