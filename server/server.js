@@ -15,14 +15,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Middleware
-const { auth } = require('./middleware/quth');
+const { auth } = require('./middleware/auth');
 const {admin} = require('./middleware/admin');
 
 //Models//
 const {User} = require('./models/user');
 const {Publisher} = require('./models/publisher');
 const {Genre} = require('./models/genre');
-const {Product} = require('/models/product');
+const {Product} = require('./models/product');
 const {Character} = require('./models/character');
 
 app.all('/', function(req, res, next){
@@ -135,8 +135,8 @@ app.post('/api/product/publisher', auth,admin,(req,res)=>{
 
     publisher.save((err,doc)=>{
         if(err) return res.json({success:false,err});
-        res.status.status(200).json({
-            success: truw,
+        res.status(200).json({
+            success: true,
             publisher:doc
         })
     })
@@ -173,7 +173,7 @@ app.post('/api/user/register',(req,res)=>{
         if(err) return res.json({success:false,err})
         res.status(200).json({
             success: true,
-            userdata:doc
+            userdata:doc.name
         })
     })
 });

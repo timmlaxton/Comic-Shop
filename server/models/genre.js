@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const getSchema = mongoose.Schema({
+const genreSchema = mongoose.Schema({
     name: {
         required: true,
         type: String,

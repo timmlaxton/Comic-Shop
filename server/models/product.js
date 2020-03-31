@@ -23,7 +23,7 @@ const productSchema = mongoose.Schema({
         maxlength: 255
     },
     publisher: {
-        type: Schem.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         red: 'Publisher',
         required: true
     },
