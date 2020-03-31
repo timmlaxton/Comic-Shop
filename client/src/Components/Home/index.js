@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from './node_modules/react';
 
 class Home extends Component {
     render() {
         return (
             <div>
-               Home 
+               <h2> Home </h2> 
             </div>
         );
     }

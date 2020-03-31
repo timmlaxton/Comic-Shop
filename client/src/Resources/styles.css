@@ -28,7 +28,7 @@ a {
 }
 
 .bck_b_light {
-    background: #999592;
+    background: white;
 }
 
 .bck_b_dark {
@@ -250,17 +250,11 @@ header {
     border-bottom: 1px solid white;
 }
 
-shop_logo {
-    margin-left: -100px;
-
-}
-
 header .logo {
     font-family: 'Monoton', cursive;
-    color: #ffffff;
-    font-size: 40px;
-    padding: 11px 0px;
-    margin-left: -160px;
+    color: #050505;
+    font-size: 30px;
+    padding: 8px 0px;
 }
 
 header a {
@@ -271,7 +265,9 @@ header .container {
     display: flex;
 }
 
-
+header .container .left{
+    width: 250px;
+}
 
 header .container .right{
    flex-grow: 1;
@@ -282,14 +278,11 @@ header .container .right .bottom {
     text-transform: uppercase;
     font-weight: 700;
     text-align: right;
-    color: white;
+    color:#111010;
     font-size: 15px;
     padding: 10px 20px;
 }
 
-
-    
-    
 
 
 header .cart_link {
@@ -299,7 +292,7 @@ header .cart_link {
 
 header .cart_link span {
     position: absolute;
-    background: #ffff;
+    background: red;
     top: 2px;
     color: #ffff;
     left: -8px;
