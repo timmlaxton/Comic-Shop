@@ -12,7 +12,7 @@ const RegisterLogin = () => {
                     <p> Monkey monkey monkey tickle rooo</p>
                     <MyButton
                         type="default"
-                        title="Create an account"
+                        title="Create Account"
                         linkTo="/register"
                         addStyles={{
                             margin:'10px 0 0 0'
