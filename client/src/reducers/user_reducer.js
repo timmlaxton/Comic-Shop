@@ -9,7 +9,7 @@ import {
 export default function(state={},action){
     switch(action.type){
         case REGISTER_USER:
-        return {...state, register: action.payload}
+        return {...state, registerSuccess: action.payload}
         case LOGIN_USER:
             return {...state, loginSuccess: action.payload}
         default:
