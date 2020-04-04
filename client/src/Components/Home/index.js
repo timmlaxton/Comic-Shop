@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import HomeSlider from './home_slider';
-import HomePromotion from './home_promotions'
+import HomePromotion from './home_promotions';
+import CardBlock from '../utils/card_block'
 
 import {connect} from 'react-redux';
-import { getProductsBySell, getProductsByArrival} from '../../actions/products_actions'
+import { getProductsBySell, getProductsByArrival} from '../../actions/products_actions';
+
 
 
 class Home extends Component {
@@ -17,7 +19,17 @@ class Home extends Component {
         return (
             <div>
                 <HomeSlider/>
+                <CardBlock
+                    list={this.props.products.bySell}
+                    title="Staff Picks"
+                
+                />
                 <HomePromotion/>
+                <CardBlock
+                    list={this.props.products.byArrival}
+                    title="New Arrivals"
+                
+                />
             </div>
         );
     }
@@ -25,7 +37,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.prop
+        products: state.products
     }
 }
 

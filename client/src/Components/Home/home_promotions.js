@@ -4,7 +4,7 @@ import MyButton from '../utils/button'
 const HomePromotion = (props) => {
 
     const order = {
-        img: 'Slider/pull.jpg',
+        img: 'images/featured/pull.jpg',
         lineOne: 'Standing Order',
         lineTwo: 'Click on the link above to find out how to start one today',
         linkTitle: 'Subscribe Now',

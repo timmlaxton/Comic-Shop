@@ -468,7 +468,7 @@ footer .business_nfo .nfo {
 
 .card_item_wrapper .image {
     width: 100%;
-    height: 280px;
+    height: 200px;
     background-position: center !important;
     background-size: cover !important;
     border: 1px solid #f0f0f0;
@@ -480,8 +480,8 @@ footer .business_nfo .nfo {
     border-bottom: 1px solid #f0f0f0;
 }
 
-.card_item_wrapper .tags .brand,
 .card_item_wrapper .tags .name,
+.card_item_wrapper .tags .issue,
 .card_item_wrapper .tags .price {
     text-align: center;
     margin: 5px;
