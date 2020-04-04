@@ -255,13 +255,14 @@ header {
 header .logo {
     font-family: 'Monoton', cursive;
     color: #050505;
-    height: 180px;
+    height: 150px;
     position : absolute;
     
 }
 
 header a {
     margin-left: 20px;
+
 }
 
 header .container {
