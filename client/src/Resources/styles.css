@@ -253,10 +253,11 @@ header {
 
 
 header .logo {
-    font-family: 'Monoton', cursive;
-    color: #050505;
     height: 150px;
-    position : absolute;
+    position: fixed;
+    top: 0px;
+    left: 5px;
+    text-align: left;
     
 }
 
