@@ -9,11 +9,11 @@ const HomeSlider = (props) => {
             img: 'Slider/Batman.jpg',
             lineOne: 'Trades',
             lineTwo: '',
-            linkTitle: '',
+            linkTitle: 'Shop now',
             linkTo: '/shop'
         },
         {
-            img: 'Slider/Batman.jpg',
+            img: 'Slider/Criminal1.jpg',
             lineOne: 'Trades',
             lineTwo: '',
             linkTitle: '',
@@ -25,7 +25,7 @@ const HomeSlider = (props) => {
 const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 100,
     slideToShow: 1,
     slideToScroll: 1,
     arrows: false
