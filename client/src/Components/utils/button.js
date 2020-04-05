@@ -12,7 +12,7 @@ const MyButton = (props) => {
 
         switch(props.type){
             case "default":
-                template = <Link
+                template = <Link 
                     className={!props.altClass ? 'link_default': props.altClass }   
                     to={props.linkTo}
                     {...props.addStyles}

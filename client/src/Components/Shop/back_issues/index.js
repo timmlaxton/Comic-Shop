@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PageTop from '../../utils/page_top';
 
-import {publishers} from '../../utils/Form/fixed_catergories';
+import {publishers, price} from '../../utils/Form/fixed_catergories';
 
 import {connect} from 'react-redux';
 import { getCharacters, getArticles, getPublishers, getGenres} from '../../../actions/products_actions';
@@ -30,9 +30,27 @@ class BackIssues extends Component {
         this.props.dispatch(getGenres());
     }
 
+    handlePrice = (value) => {
+        const data = price;
+        var array = [];
+
+        for(var key in data){
+            if(data[key]._id === parseInt(value,10)){
+                array =  data[key].array
+            }
+        }
+        return array;
+    }
+
     handleFilters = (filters,catergory) => {
             const newFilters = {...this.state.filters}
             newFilters[catergory] = filters;
+
+            if(catergory === 'price'){
+                var priceValues = this.handlePrice(filters);
+                newFilters[catergory] = priceValues;
+
+            }
 
             this.setState({
                 filters: newFilters
@@ -41,7 +59,6 @@ class BackIssues extends Component {
 
 
     render() {
-        console.log(this.state.filters)
         const products = this.props.products;
         return (
             <div>
@@ -54,16 +71,23 @@ class BackIssues extends Component {
                         <div className="left">
                            <CollapseCheckbox
                             initState={true}
-                            title="Comics"
+                            title="Title"
                             list={products.articles}
                             handleFilters={(filters)=> this.handleFilters(filters, 'articles')}
                            /> 
 
                             <CollapseCheckbox
                             initState={false}
-                            title="Publishers"
+                            title="Publisher"
                             list={publishers}
                             handleFilters={(filters)=> this.handleFilters(filters, 'publishers')}
+                           /> 
+
+                            <CollapseRadio
+                            initState={true}
+                            title="Price"
+                            list={price}
+                            handleFilters={(filters)=> this.handleFilters(filters, 'price')}
                            /> 
 
 
