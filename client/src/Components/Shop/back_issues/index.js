@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import PageTop from '../../utils/page_top';
 
+import {publishers} from '../../utils/Form/fixed_catergories';
+
 import {connect} from 'react-redux';
 import { getCharacters, getArticles, getPublishers, getGenres} from '../../../actions/products_actions';
 
 import CollapseCheckbox from '../../utils/collapseCheckbox';
+import CollapseRadio from '../../utils/collapseRadio'
 
 class BackIssues extends Component {
+
+    state = {
+        grid: '',
+        limit:6,
+        skip:0,
+        filters:{
+            articles:[],
+            publishers:[],
+            price:[]
+        }
+    }
 
 
     componentDidMount(){
@@ -17,11 +31,17 @@ class BackIssues extends Component {
     }
 
     handleFilters = (filters,catergory) => {
+            const newFilters = {...this.state.filters}
+            newFilters[catergory] = filters;
 
+            this.setState({
+                filters: newFilters
+            })
     }
 
 
     render() {
+        console.log(this.state.filters)
         const products = this.props.products;
         return (
             <div>
@@ -37,12 +57,14 @@ class BackIssues extends Component {
                             title="Comics"
                             list={products.articles}
                             handleFilters={(filters)=> this.handleFilters(filters, 'articles')}
-
-                            
-                           
                            /> 
 
-
+                            <CollapseCheckbox
+                            initState={false}
+                            title="Publishers"
+                            list={publishers}
+                            handleFilters={(filters)=> this.handleFilters(filters, 'publishers')}
+                           /> 
 
 
 
