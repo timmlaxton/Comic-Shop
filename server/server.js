@@ -130,7 +130,7 @@ app.get('/api/product/genres', (req,res)=> {
 })
 
 //Publisher
-app.post('/api/product/publisher', auth,admin,(req,res)=>{
+app.post('/api/product/publisher',auth,admin,(req,res)=>{
     const publisher = new Publisher(req.body);
 
     publisher.save((err,doc)=>{
@@ -140,15 +140,17 @@ app.post('/api/product/publisher', auth,admin,(req,res)=>{
             publisher:doc
         })
     })
-})
+});
 
 
-app.get('api/product/publisher', (req,res)=> {
+app.get('api/product/publishers', (req,res)=> {
     Publisher.find({},(err,publishers)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(publishers)
     })
 })
+
+
 
 
 //User

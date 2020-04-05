@@ -6,7 +6,7 @@ const HomeSlider = (props) => {
 
     const slides = [
         {
-            img: 'images/featured//Batman.jpg',
+            img: 'images/featured/Batman.jpg',
             lineOne: 'Trades',
             lineTwo: '',
             linkTitle: 'Shop now',
@@ -16,7 +16,7 @@ const HomeSlider = (props) => {
             img: 'images/featured/Criminal1.jpg',
             lineOne: 'Trades',
             lineTwo: '',
-            linkTitle: '',
+            linkTitle: 'Shop now',
             linkTo: '/shop'
         }
     ]
