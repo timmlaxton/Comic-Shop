@@ -21,7 +21,6 @@ const {admin} = require('./middleware/admin');
 //Models//
 const {User} = require('./models/user');
 const {Publisher} = require('./models/publisher');
-const {Genre} = require('./models/genre');
 const {Product} = require('./models/product');
 const {Character} = require('./models/character');
 
@@ -32,37 +31,58 @@ app.all('/', function(req, res, next) {
     next();
 });
 
-// Character
-app.post('/api.product/character', auth,admin,(req,res)=> {
 
-    const character = new Character(req.body);
-
-    character.save((err,doc) => {
-        if(err) return res.json({success:false,err});
-        res.status(200).json({
-            success:true,
-            character: doc
-        })
-    })
-});
-
-app.get('/api/product/characters', (req,res)=> {
-    Character.find({},(err, characters)=> {
-        if(err) return res.status(400).send(err);
-        res.status(200).send(characters)
-    })
-});
 
 //Products
+
+app.post('/api/product/shop/back_issues',(req,res)=>{
+
+    var order = req.body.order ? req.body.order : 'desc';
+    var sortBy = req.body.sortBy ? req.body.sortBy : '_id';
+    var limit = req.body.limit ? parseInt(req.body.limit) : 100;
+    var skip = parseInt(req.body.skip);
+    var findArgs = {};
+
+    for(var key in req.body.filters){
+        if(req.body.filters[key].length >0){
+            if(key === 'price'){
+                findArgs[key] = {
+                    $gte: req.body.filters[key][0],
+                    $lte: req.body.filters[key][1]
+                }
+            }else{
+                findArgs[key] = req.body.filters[key]
+            }
+        }
+
+    }
+
+
+    Product.
+    find(findArgs).
+    populate('character').
+    sort([[sortBy,order]]).
+    skip(skip).
+    limit(limit). 
+    exec((err,articles)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).json({
+            size: articles.length,
+            articles
+
+        })
+
+    })
+})
+
+
 app.get('/api/product/articles', (req,res)=> {
 
-    let order = req.query.order ? req.query.order : "asc";
-    let sortBy = req.query.sortby ? req.query.sortBy : "_id";
-    let limit = req.query.limit ? parseInt(req.query.limit) : 100;
+    var order = req.query.order ? req.query.order : "asc";
+    var sortBy = req.query.sortby ? req.query.sortBy : "_id";
+    var limit = req.query.limit ? parseInt(req.query.limit) : 100;
 
     Product.find().
-    populate('genre').
-    populate('publisher').
     populate('character').
     sort([[sortBy,order]]).
     limit(limit).
@@ -74,11 +94,11 @@ app.get('/api/product/articles', (req,res)=> {
 })
 
 app.get('api/products/articles_by_id', (req,res)=> {
-    let type = req.query.type;
-    let items = req.query.id;
+    var type = req.query.type;
+    var items = req.query.id;
 
     if(type === "array") {
-        let ids = req.query.id.split(',');
+        var ids = req.query.id.split(',');
         items = [];
         items = ids.map(item=>{
             return mongoose.Types.ObjectId(item)
@@ -86,9 +106,7 @@ app.get('api/products/articles_by_id', (req,res)=> {
     }
 
     Product.
-    find({'_id':{$in:items}}). 
-    populate('genre'). 
-    populate('publisher'). 
+    find({'_id':{$in:items}}).  
     populate('character').
     exec((err,docs)=> {
         return res.status(200).send(docs)
@@ -108,26 +126,26 @@ app.post('/api/product/article', auth,admin, (req,res)=> {
     })
 });
 
-//Genre
-app.post('/api/product/genre', auth,admin,(req,res)=> {
+// Character
+app.post('/api/product/character', auth,admin,(req,res)=> {
+    const character = new Character(req.body);
 
-    const genre = new Genre(req.body);
-
-    genre.save((err,doc)=>{
+    character.save((err,doc) => {
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success:true,
-            genre:doc
+            character: doc
         })
     })
 });
 
-app.get('/api/product/genres', (req,res)=> {
-    Genre.find({},(err,genres)=>{
+app.get('/api/product/characters', (req,res)=> {
+    Character.find({},(err, characters)=> {
         if(err) return res.status(400).send(err);
-        res.status(200).send(genres)
+        res.status(200).send(characters)
     })
-})
+});
+
 
 //Publisher
 app.post('/api/product/publisher',auth,admin,(req,res)=>{
@@ -174,7 +192,8 @@ app.post('/api/users/register',(req,res)=>{
     user.save((err,doc)=>{
         if(err) return res.json({success:false,err})
         res.status(200).json({
-            success: true
+            success: true,
+            userdata: doc
             
         })
     })

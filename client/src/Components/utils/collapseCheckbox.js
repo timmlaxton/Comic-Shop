@@ -66,6 +66,7 @@ class CollapseCheckbox extends Component {
 
         ))
         :null
+        
         )
        
         handleToggle = value => () => {

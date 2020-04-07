@@ -27,7 +27,7 @@ const price = [
     },
     {
         "_id":1,
-        "name":"£0 to £399",
+        "name":"£0 to £3.99",
         "array":[0,399]
     },
     {

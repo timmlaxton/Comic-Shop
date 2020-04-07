@@ -4,9 +4,7 @@ import {
         GET_PRODUCTS_BY_SELL,
         GET_PRODUCTS_BY_ARRIVAL,
         GET_CHARACTERS,
-        GET_ARTICLES,
-        GET_PUBLISHERS,
-        GET_GENRES
+        GET_PRODUCTS_TO_SHOP
        
     } from './types';
 
@@ -35,7 +33,28 @@ export function getProductsByArrival(){
 }
 
 
-export function getCharacters(){
+export function getProductsToShop(limit, skip, filters =[],previousState = []){
+    const data ={limit, skip, filters}
+
+    const request = axios.post(`${PRODUCT_SERVER}/Shop/back_issues`, data)
+        .then(response => {
+            return {
+                size: response.data.size,
+                articles: response.data.articles
+            }
+        });
+
+    return {
+        type: GET_PRODUCTS_TO_SHOP,
+        payload: request
+    }
+
+}
+
+
+
+
+export function  getCharacters(){
     const request = axios.get(`${PRODUCT_SERVER}/characters`)
     .then(response => response.data)
 
@@ -45,32 +64,3 @@ export function getCharacters(){
     }
 } 
 
-
-export function  getArticles(){
-    const request = axios.get(`${PRODUCT_SERVER}/articles`)
-    .then(response => response.data)
-
-    return {
-        type: GET_ARTICLES,
-        payload: request
-    }
-} 
-
-export function  getPublishers(){
-    const request = axios.get(`${PRODUCT_SERVER}/publishers`)
-    .then(response => response.data)
-
-    return {
-        type: GET_PUBLISHERS,
-        payload: request
-    }
-} 
-export function  getGenres(){
-    const request = axios.get(`${PRODUCT_SERVER}/genres`)
-    .then(response => response.data)
-
-    return {
-        type: GET_GENRES,
-        payload: request
-    }
-} 

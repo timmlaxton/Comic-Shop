@@ -36,10 +36,10 @@ class Register extends Component {
                 element: 'input',
                 value: '',
                 config:{
-                    name: 'surname_input',
-                    type: 'text',
-                    placeholder: 'Enter your surname'
-                },
+                        name:'surname_input',
+                        type:'text',
+                        placeholder:'Enter your surname'
+            },
                 validation:{
                     required: true
                 },

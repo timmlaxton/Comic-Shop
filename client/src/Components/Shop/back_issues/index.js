@@ -4,7 +4,9 @@ import PageTop from '../../utils/page_top';
 import {publishers, price} from '../../utils/Form/fixed_catergories';
 
 import {connect} from 'react-redux';
-import { getCharacters, getArticles, getPublishers, getGenres} from '../../../actions/products_actions';
+import { getProductsToShop, getCharacters} from '../../../actions/products_actions';
+
+import LoadmoreCards from './loadmoreCards';
 
 import CollapseCheckbox from '../../utils/collapseCheckbox';
 import CollapseRadio from '../../utils/collapseRadio'
@@ -16,8 +18,9 @@ class BackIssues extends Component {
         limit:6,
         skip:0,
         filters:{
-            articles:[],
-            publishers:[],
+            
+            character:[],
+            publisher:[],
             price:[]
         }
     }
@@ -25,9 +28,11 @@ class BackIssues extends Component {
 
     componentDidMount(){
         this.props.dispatch(getCharacters());
-        this.props.dispatch(getArticles());
-        this.props.dispatch(getPublishers());
-        this.props.dispatch(getGenres());
+        this.props.dispatch(getProductsToShop(
+            this.state.limit,
+            this.state.skip,
+            this.state.filters
+        ))
     }
 
     handlePrice = (value) => {
@@ -51,10 +56,23 @@ class BackIssues extends Component {
                 newFilters[catergory] = priceValues;
 
             }
-
+            this.showFilteredResults(newFilters)
             this.setState({
                 filters: newFilters
             })
+    }
+
+
+    showFilteredResults = (filters) => {
+        this.props.dispatch(getProductsToShop(
+            0,
+            this.state.limit,
+            filters
+        )).then(()=>{
+            this.setState({
+                skip:0
+            })
+        })
     }
 
 
@@ -72,8 +90,8 @@ class BackIssues extends Component {
                            <CollapseCheckbox
                             initState={true}
                             title="Title"
-                            list={products.articles}
-                            handleFilters={(filters)=> this.handleFilters(filters, 'articles')}
+                            list={products.characters}
+                            handleFilters={(filters)=> this.handleFilters(filters, 'character')}
                            /> 
 
                             <CollapseCheckbox
@@ -94,10 +112,22 @@ class BackIssues extends Component {
 
                         </div>
                         <div className="right">
-                            RIGHT
+                            <div className="shop_options">
+                                <div className="shop_grids_clear">
+                                grids
+                            </div>
                         </div>
+                        <div>
+                            <LoadmoreCards
+                                grid={this.state.grid}
+                                limit={this.state.limit}
+                                size={products.toShopSize}
+                                products={products.toShop}
+                                loadMore={()=> this.LoadmoreCards()}
+                            />
+                         </div>
+                      </div>
                     </div>
-
                 </div>
             </div>
         );

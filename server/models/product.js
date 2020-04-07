@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = mongoose.Schema({
-    name: {
-        required: true,
-        type: String,
-        maxlength: 100
+    character:{
+        type: Schema.Types.ObjectId,
+        ref: 'Character',
+        required: true
     },
-    issue: {
+    issue: { 
         required: true,
         type: Number,
         maxlength: 255
@@ -31,16 +31,6 @@ const productSchema = mongoose.Schema({
         required: true,
         type: Boolean
     },
-    genre: {
-        type: Schema.Types.ObjectId,
-        ref: 'Genre',
-        required: true
-    },
-    sold: {
-        type: Number,
-        maxlength: 100,
-        default: 0
-    },
     publish: {
         required: true,
         type: Boolean
@@ -52,5 +42,4 @@ const productSchema = mongoose.Schema({
 }, {timestamps:true, collection: 'product'});
 
 const Product = mongoose.model('Product', productSchema);
-
 module.exports = {Product}
