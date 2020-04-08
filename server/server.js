@@ -57,10 +57,13 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
 
     }
 
+    findArgs['publish'] =  true;
+
 
     Product.
     find(findArgs).
     populate('character').
+    populate('publisher').
     sort([[sortBy,order]]).
     skip(skip).
     limit(limit). 
@@ -84,6 +87,7 @@ app.get('/api/product/articles', (req,res)=> {
 
     Product.find().
     populate('character').
+    populate('publisher').
     sort([[sortBy,order]]).
     limit(limit).
     exec((err,articles)=>{
@@ -93,12 +97,12 @@ app.get('/api/product/articles', (req,res)=> {
 
 })
 
-app.get('api/products/articles_by_id', (req,res)=> {
-    var type = req.query.type;
-    var items = req.query.id;
+app.get('/api/product/articles_by_id',(req,res)=>{
+    let type = req.query.type;
+    let items = req.query.id;
 
-    if(type === "array") {
-        var ids = req.query.id.split(',');
+    if(type === "array"){
+        let ids = req.query.id.split(',');
         items = [];
         items = ids.map(item=>{
             return mongoose.Types.ObjectId(item)
@@ -106,12 +110,12 @@ app.get('api/products/articles_by_id', (req,res)=> {
     }
 
     Product.
-    find({'_id':{$in:items}}).  
+    find({ '_id':{$in:items}}).
     populate('character').
-    exec((err,docs)=> {
+    exec((err,docs)=>{
         return res.status(200).send(docs)
     })
-})
+});
 
 
 app.post('/api/product/article', auth,admin, (req,res)=> {

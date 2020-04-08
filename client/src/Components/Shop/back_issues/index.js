@@ -7,6 +7,9 @@ import {connect} from 'react-redux';
 import { getProductsToShop, getCharacters} from '../../../actions/products_actions';
 
 import LoadmoreCards from './loadmoreCards';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import faBars from '@fortawesome/fontawesome-free-solid/faBars';
+import faTh from '@fortawesome/fontawesome-free-solid/faTh';
 
 import CollapseCheckbox from '../../utils/collapseCheckbox';
 import CollapseRadio from '../../utils/collapseRadio'
@@ -18,7 +21,6 @@ class BackIssues extends Component {
         limit:6,
         skip:0,
         filters:{
-            
             character:[],
             publisher:[],
             price:[]
@@ -75,6 +77,26 @@ class BackIssues extends Component {
         })
     }
 
+    loadMoreCards = () => {
+         var skip = this.state.skip + this.state.limit;
+
+         this.props.dispatch(getProductsToShop(
+             skip,
+             this.state.limit,
+             this.state.filters,
+             this.props.products.toShop
+         )).then(()=>{
+             this.setState({
+                 skip
+             })
+         })
+    }
+    handleGrid= () => {
+        this.setState({
+            grid: !this.state.grid ? 'grid-bars':" "
+        })
+    }
+
 
     render() {
         const products = this.props.products;
@@ -97,7 +119,7 @@ class BackIssues extends Component {
                             <CollapseCheckbox
                             initState={false}
                             title="Publisher"
-                            list={publishers}
+                            list={products.publishers}
                             handleFilters={(filters)=> this.handleFilters(filters, 'publishers')}
                            /> 
 
@@ -113,8 +135,21 @@ class BackIssues extends Component {
                         </div>
                         <div className="right">
                             <div className="shop_options">
-                                <div className="shop_grids_clear">
-                                grids
+                                <div className="shop_grids clear">
+                                <div
+                                className={`grid_btn ${this.state.grid?'': 'active'}`}
+                                onClick={()=> this.handleGrid()}
+                                >
+                                    <FontAwesomeIcon icon={faTh}/>
+
+                                </div>
+                                <div
+                                className={`grid_btn ${!this.state.grid?'': 'active'}`}
+                                onClick={()=> this.handleGrid()}
+                                >
+                                    <FontAwesomeIcon icon={faBars}/>
+
+                                </div>
                             </div>
                         </div>
                         <div>
@@ -123,7 +158,7 @@ class BackIssues extends Component {
                                 limit={this.state.limit}
                                 size={products.toShopSize}
                                 products={products.toShop}
-                                loadMore={()=> this.LoadmoreCards()}
+                                loadMore={()=> this.loadMoreCards()}
                             />
                          </div>
                       </div>

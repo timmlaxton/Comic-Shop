@@ -24,7 +24,7 @@ const productSchema = mongoose.Schema({
     },
     publisher: {
         type: Schema.Types.ObjectId,
-        red: 'Publisher',
+        ref: 'Publisher',
         required: true
     },
     shipping: {
