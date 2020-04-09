@@ -67,7 +67,7 @@ class AddProduct extends Component {
                 element: 'select',
                 value: '',
                 config:{
-                    label: 'Product character',
+                    label: 'Product Character',
                     name: 'character_input',
                     options:[]
                 },
@@ -104,7 +104,10 @@ class AddProduct extends Component {
                 config:{
                     label: 'Shipping',
                     name: 'shipping_input',
-                    options:[]
+                    options:[
+                        {key:true,value:'Yes'},
+                        {key:false,value:'No'},
+                    ]
                 },
                 validation:{
                     required: true
@@ -179,12 +182,19 @@ class AddProduct extends Component {
     submitForm= (event) =>{
         event.preventDefault();
         
-        var dataToSubmit = generateData(this.state.formdata,'register');
-        var formIsValid = isFormValid(this.state.formdata,'register')
+        let dataToSubmit = generateData(this.state.formdata,'products');
+        let formIsValid = isFormValid(this.state.formdata,'products')
 
         if(formIsValid){
-            console.log(dataToSubmit);
-            
+            this.props.dispatch(addProduct(dataToSubmit)).then(()=>{
+                if( this.props.products.addProduct.success){
+                    this.resetFieldHandler();
+
+                }else{
+                    this.setState({formError: true})
+
+                }
+            })
         } else {
             this.setState({
                 formError: true
@@ -204,7 +214,7 @@ class AddProduct extends Component {
         })
 
         this.props.dispatch(getPublishers()).then( response => {
-            const newFormData = populateOptionFields(formdata,this.props.products.publishers, 'character');            
+            const newFormData = populateOptionFields(formdata,this.props.products.publishers, 'publisher');            
             this.updateFields(newFormData)
             console.log(newFormData);
             
@@ -248,6 +258,12 @@ class AddProduct extends Component {
                      />
 
                     <FormField
+                       id={'publisher'}
+                       formdata={this.state.formdata.publisher}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                    <FormField
                        id={'available'}
                        formdata={this.state.formdata.available}
                        change={(element)=> this.updateForm(element)}
@@ -262,19 +278,7 @@ class AddProduct extends Component {
 
                     <div className="form_devider"></div>
 
-                    <FormField
-                       id={'publisher'}
-                       formdata={this.state.formdata.shipping}
-                       change={(element)=> this.updateForm(element)}
-                     />
-
-                       <FormField
-                       id={'publisher'}
-                       formdata={this.state.formdata.publisher}
-                       change={(element)=> this.updateForm(element)}
-                     /> 
-
-                    <div className="form_devider"></div>
+                   
 
                     <FormField
                        id={'publish'}

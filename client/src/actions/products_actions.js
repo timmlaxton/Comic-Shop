@@ -37,7 +37,6 @@ export function getProductsByArrival(){
 
 export function getProductsToShop(limit, skip, filters  = []){
     const data ={limit, skip, filters}
-
     const request = axios.post(`${PRODUCT_SERVER}/Shop/back_issues`, data)
         .then(response => {
                 return {
@@ -55,7 +54,7 @@ export function getProductsToShop(limit, skip, filters  = []){
 
 export function addProduct(datatoSubmit){
     const request = axios.post(`${PRODUCT_SERVER}/article`, datatoSubmit)
-    .then(response => response.data)
+    .then(response => response.data);
 
     return {
         type: ADD_PRODUCT,

@@ -75,15 +75,14 @@ export const generateData = (formdata, formName) => {
         return formIsValid;
 }
 
-    export const populateOptionFields = (formdata, arrayData =[] ,field) => {
+export const populateOptionFields= (formdata, arrayData =[],field) => {
     const newArray = [];
     const newFormdata = {...formdata};
 
     arrayData.forEach(item=>{
-        newArray.push({key:item._id, value:item.name});
+        newArray.push({key:item._id,value:item.name});
     });
 
-    newFormdata[field].config.option = newArray;
+    newFormdata[field].config.options = newArray;
     return newFormdata;
-
 }

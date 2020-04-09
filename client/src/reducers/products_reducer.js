@@ -30,7 +30,7 @@ export default function(state={},action){
                     toShopSize: action.payload.size
                 }
         case ADD_PRODUCT: 
-            return {...state,addProduct: action.payload}
+            return {...state, addProduct: action.payload}
         default:
             return state;
 
