@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import UserLayout from '../../../hoc/user';
 import FormField from '../../utils/Form/formfield';
-import { update, generateData, isFormValid } from '../../utils/Form/formActions';
+import { update, generateData, isFormValid, populateOptionFields } from '../../utils/Form/formActions';
 
 import {connect} from 'react-redux'
-import {getCharacters, getPublisher} from '../../../actions/products_actions'
+import {getCharacters, getPublishers, addProduct } from '../../../actions/products_actions'
 
 class AddProduct extends Component {
 
@@ -33,7 +33,7 @@ class AddProduct extends Component {
                 element: 'textarea',
                 value: '',
                 config:{
-                    label: 'product description',
+                    label: 'Product description',
                     name: 'description_input',
                     type: 'text',
                     placeholder: 'Enter your description'
@@ -50,7 +50,7 @@ class AddProduct extends Component {
                 element: 'input',
                 value: '',
                 config:{
-                    label: 'product price',
+                    label: 'Product price',
                     name: 'price_input',
                     type: 'number',
                     placeholder: 'Enter your price'
@@ -131,25 +131,8 @@ class AddProduct extends Component {
                 validationMessage:'',
                 showlabel: true
             },
-            // frets: {
-            //     element: 'select',
-            //     value: '',
-            //     config:{
-            //         label: 'Frets',
-            //         name: 'frets_input',
-            //         options:[
-            //             {key:true,value:'Yes'},
-            //             {key:false,value:'No'},
-            //         ]
-            //     },
-            //     validation:{
-            //         required: true
-            //     },
-            //     valid: false,
-            //     touched: false,
-            //     validationMessage:'',
-            //     showlabel: true
-            // },
+            
+            
             publish: {
                 element: 'select',
                 value: '',
@@ -172,6 +155,61 @@ class AddProduct extends Component {
         }
     }
 
+    updateFields = (newFormData) => {
+        this.setState({
+            formdata: newFormData
+        })
+    }
+
+
+    
+    updateForm = (element) => {
+        const newFormdata = update(element,this.state.formdata,'products');
+        this.setState({
+            formError: false,
+            formdata: newFormdata
+        })
+    }
+
+    
+    
+    
+
+
+    submitForm= (event) =>{
+        event.preventDefault();
+        
+        var dataToSubmit = generateData(this.state.formdata,'register');
+        var formIsValid = isFormValid(this.state.formdata,'register')
+
+        if(formIsValid){
+            console.log(dataToSubmit);
+            
+        } else {
+            this.setState({
+                formError: true
+            })
+        }
+    }
+    
+
+    componentDidMount(){
+        const formdata =  this.state.formdata;
+
+        this.props.dispatch(getCharacters()).then( response => {
+            const newFormData = populateOptionFields(formdata,this.props.products.characters, 'character');            
+            this.updateFields(newFormData)
+            console.log(newFormData);
+            
+        })
+
+        this.props.dispatch(getPublishers()).then( response => {
+            const newFormData = populateOptionFields(formdata,this.props.products.publishers, 'character');            
+            this.updateFields(newFormData)
+            console.log(newFormData);
+            
+        })
+    }
 
 
     render() {
@@ -181,11 +219,84 @@ class AddProduct extends Component {
                    <h1>Add product</h1>
 
                    <form onSubmit={(event)=> this.submitForm(event)}>
+                   
                    <FormField
                        id={'name'}
                        formdata={this.state.formdata.name}
                        change={(element)=> this.updateForm(element)}
                      />
+
+
+                    <FormField
+                       id={'description'}
+                       formdata={this.state.formdata.description}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                     <FormField
+                       id={'price'}
+                       formdata={this.state.formdata.price}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                     <div className="form_devider"></div>
+
+                     <FormField
+                       id={'character'}
+                       formdata={this.state.formdata.character}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                    <FormField
+                       id={'available'}
+                       formdata={this.state.formdata.available}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                    <FormField
+                       id={'shipping'}
+                       formdata={this.state.formdata.shipping}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+
+                    <div className="form_devider"></div>
+
+                    <FormField
+                       id={'publisher'}
+                       formdata={this.state.formdata.shipping}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                       <FormField
+                       id={'publisher'}
+                       formdata={this.state.formdata.publisher}
+                       change={(element)=> this.updateForm(element)}
+                     /> 
+
+                    <div className="form_devider"></div>
+
+                    <FormField
+                       id={'publish'}
+                       formdata={this.state.formdata.publish}
+                       change={(element)=> this.updateForm(element)}
+                     /> 
+
+                    {this.state.formSuccess ?
+                        <div className="form_success">
+                                Success
+                            </div>
+                        :null}
+
+                        {this.state.formError ?
+                            <div className="error_label">
+                                Please check your data
+                                        </div>
+                            : null}
+                        <button onClick={(event) => this.submitForm(event)}>
+                            Add product
+                        </button>
+
                    </form>
                </div>
 

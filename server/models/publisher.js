@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const publisherSchema = mongoose.Schema({
-    name:{
+    name: {
         required: true,
         type: String,
         unique: 1,

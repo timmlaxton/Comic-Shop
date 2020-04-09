@@ -4,7 +4,9 @@ import {
         GET_PRODUCTS_BY_SELL,
         GET_PRODUCTS_BY_ARRIVAL,
         GET_CHARACTERS,
-        GET_PRODUCTS_TO_SHOP
+        GET_PUBLISHERS,
+        GET_PRODUCTS_TO_SHOP,
+        ADD_PRODUCT
        
     } from './types';
 
@@ -33,20 +35,14 @@ export function getProductsByArrival(){
 }
 
 
-export function getProductsToShop(limit, skip, filters =[],previousState = []){
+export function getProductsToShop(limit, skip, filters  = []){
     const data ={limit, skip, filters}
 
     const request = axios.post(`${PRODUCT_SERVER}/Shop/back_issues`, data)
         .then(response => {
-            var newState = [
-                ...previousState,
-                ...response.data.articles
-
-            ];
-
-            return {
+                return {
                 size: response.data.size,
-                articles: newState
+                articles: response.data.articles
             }
         });
 
@@ -55,6 +51,16 @@ export function getProductsToShop(limit, skip, filters =[],previousState = []){
         payload: request
     }
 
+}
+
+export function addProduct(datatoSubmit){
+    const request = axios.post(`${PRODUCT_SERVER}/article`, datatoSubmit)
+    .then(response => response.data)
+
+    return {
+        type: ADD_PRODUCT,
+        payload: request
+    }
 }
 
 
@@ -69,4 +75,15 @@ export function  getCharacters(){
         payload: request
     }
 } 
+
+export function  getPublishers(){
+    const request = axios.get(`${PRODUCT_SERVER}/publishers`)
+    .then(response => response.data)
+
+    return {
+        type: GET_PUBLISHERS,
+        payload: request
+    }
+} 
+
 

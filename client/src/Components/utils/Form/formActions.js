@@ -66,11 +66,24 @@ export const generateData = (formdata, formName) => {
     return dataToSubmit;
 }
 
-export const isFormValid = (formdata, formName) => {
+    export const isFormValid = (formdata, formName) => {
         var formIsValid = true;
 
         for(var key in formdata){
             formIsValid = formdata[key].valid && formIsValid
         }
         return formIsValid;
+}
+
+    export const populateOptionFields = (formdata, arrayData =[] ,field) => {
+    const newArray = [];
+    const newFormdata = {...formdata};
+
+    arrayData.forEach(item=>{
+        newArray.push({key:item._id, value:item.name});
+    });
+
+    newFormdata[field].config.option = newArray;
+    return newFormdata;
+
 }

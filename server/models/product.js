@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = mongoose.Schema({
+    name:{
+    required: true,
+        type: String,
+        unique: 1,
+        maxlength:100
+    },
     character:{
         type: Schema.Types.ObjectId,
         ref: 'Character',

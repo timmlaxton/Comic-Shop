@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PageTop from '../../utils/page_top';
 
-import {publishers, price} from '../../utils/Form/fixed_catergories';
+import {price} from '../../utils/Form/fixed_catergories';
 
 import {connect} from 'react-redux';
-import { getProductsToShop, getCharacters} from '../../../actions/products_actions';
+import { getProductsToShop, getCharacters, getPublishers} from '../../../actions/products_actions';
 
 import LoadmoreCards from './loadmoreCards';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -30,6 +30,7 @@ class BackIssues extends Component {
 
     componentDidMount(){
         this.props.dispatch(getCharacters());
+        this.props.dispatch(getPublishers());
         this.props.dispatch(getProductsToShop(
             this.state.limit,
             this.state.skip,
@@ -39,33 +40,33 @@ class BackIssues extends Component {
 
     handlePrice = (value) => {
         const data = price;
-        var array = [];
+        let array = [];
 
-        for(var key in data){
+        for(let key in data){
             if(data[key]._id === parseInt(value,10)){
-                array =  data[key].array
+                array = data[key].array
             }
         }
         return array;
     }
 
+
     handleFilters = (filters,catergory) => {
-            const newFilters = {...this.state.filters}
-            newFilters[catergory] = filters;
+       const newFilters = {...this.state.filters}
+       newFilters[catergory] = filters;
 
-            if(catergory === 'price'){
-                var priceValues = this.handlePrice(filters);
-                newFilters[catergory] = priceValues;
+        if(catergory === "price"){
+            var priceValues = this.handlePrice(filters);
+            newFilters[catergory] = priceValues
+        }
 
-            }
-            this.showFilteredResults(newFilters)
-            this.setState({
-                filters: newFilters
-            })
+       this.showFilteredResults(newFilters)
+       this.setState({
+           filters: newFilters
+       })
     }
 
-
-    showFilteredResults = (filters) => {
+    showFilteredResults = (filters) =>{
         this.props.dispatch(getProductsToShop(
             0,
             this.state.limit,
@@ -78,22 +79,23 @@ class BackIssues extends Component {
     }
 
     loadMoreCards = () => {
-         var skip = this.state.skip + this.state.limit;
+        let skip = this.state.skip + this.state.limit;
 
-         this.props.dispatch(getProductsToShop(
-             skip,
-             this.state.limit,
-             this.state.filters,
-             this.props.products.toShop
-         )).then(()=>{
-             this.setState({
-                 skip
-             })
-         })
+        this.props.dispatch(getProductsToShop(
+            skip,
+            this.state.limit,
+            this.state.filters,
+            this.props.products.toShop
+        )).then(()=>{
+            this.setState({
+                skip
+            })
+        })
     }
-    handleGrid= () => {
+
+    handleGrid= () =>{
         this.setState({
-            grid: !this.state.grid ? 'grid-bars':" "
+            grid: !this.state.grid ? 'grid_bars':''
         })
     }
 
@@ -117,10 +119,10 @@ class BackIssues extends Component {
                            /> 
 
                             <CollapseCheckbox
-                            initState={false}
+                            initState={true} 
                             title="Publisher"
                             list={products.publishers}
-                            handleFilters={(filters)=> this.handleFilters(filters, 'publishers')}
+                            handleFilters={(filters)=> this.handleFilters(filters, 'publisher')}
                            /> 
 
                             <CollapseRadio

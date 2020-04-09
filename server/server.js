@@ -37,14 +37,14 @@ app.all('/', function(req, res, next) {
 
 app.post('/api/product/shop/back_issues',(req,res)=>{
 
-    var order = req.body.order ? req.body.order : 'desc';
-    var sortBy = req.body.sortBy ? req.body.sortBy : '_id';
-    var limit = req.body.limit ? parseInt(req.body.limit) : 100;
+    var order = req.body.order ? req.body.order : "desc";
+    var sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+    var limit = req.body.limit ? parseInt(req.body.limit) : 100; 
     var skip = parseInt(req.body.skip);
     var findArgs = {};
 
     for(var key in req.body.filters){
-        if(req.body.filters[key].length >0){
+        if(req.body.filters[key].length >0 ){
             if(key === 'price'){
                 findArgs[key] = {
                     $gte: req.body.filters[key][0],
@@ -54,10 +54,9 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
                 findArgs[key] = req.body.filters[key]
             }
         }
-
     }
 
-    findArgs['publish'] =  true;
+    findArgs['publish'] = true;
 
 
     Product.
@@ -112,6 +111,7 @@ app.get('/api/product/articles_by_id',(req,res)=>{
     Product.
     find({ '_id':{$in:items}}).
     populate('character').
+    populated('publisher').
     exec((err,docs)=>{
         return res.status(200).send(docs)
     })
@@ -165,12 +165,12 @@ app.post('/api/product/publisher',auth,admin,(req,res)=>{
 });
 
 
-app.get('api/product/publishers', (req,res)=> {
-    Publisher.find({},(err,publishers)=>{
+app.get('/api/product/publishers', (req,res)=> {
+    Publisher.find({},(err, publishers)=>{
         if(err) return res.status(400).send(err);
         res.status(200).send(publishers)
     })
-})
+});
 
 
 

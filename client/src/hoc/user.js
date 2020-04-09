@@ -25,7 +25,7 @@ const admin = [
     },
     {
         name: 'Add products',
-        linkTo: "/adin/add_product"
+        linkTo: "/admin/add_product"
     },
     {
         name: 'Manage catergories',

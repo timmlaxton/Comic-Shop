@@ -2,7 +2,9 @@ import {
     GET_PRODUCTS_BY_SELL,
     GET_PRODUCTS_BY_ARRIVAL,
     GET_CHARACTERS,
-    GET_PRODUCTS_TO_SHOP
+    GET_PUBLISHERS,
+    GET_PRODUCTS_TO_SHOP,
+    ADD_PRODUCT
 
     
 
@@ -20,11 +22,15 @@ export default function(state={},action){
             return {...state, byArrival: action.payload}
         case GET_CHARACTERS:
             return {...state, characters: action.payload}
+        case GET_PUBLISHERS:
+            return {...state, publishers: action.payload}
         case GET_PRODUCTS_TO_SHOP:
-            return {...state, 
+            return {...state,
                     toShop: action.payload.articles,
-                    toShopSize: action.payload.size  
+                    toShopSize: action.payload.size
                 }
+        case ADD_PRODUCT: 
+            return {...state,addProduct: action.payload}
         default:
             return state;
 
