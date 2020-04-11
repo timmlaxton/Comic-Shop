@@ -36,7 +36,7 @@ export function getProductsByArrival(){
 }
 
 
-export function getProductsToShop(limit, skip, filters  = []){
+export function getProductsToShop(skip, limit, filters  = []){
     const data ={limit, skip, filters}
     const request = axios.post(`${PRODUCT_SERVER}/Shop/back_issues`, data)
         .then(response => {

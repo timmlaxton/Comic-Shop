@@ -16,31 +16,32 @@ import CollapseRadio from '../../utils/collapseRadio'
 
 class BackIssues extends Component {
 
-    state = {
-        grid: '',
-        limit:6,
-        skip:0,
-        filters:{
-            characters:[],
-            publishers:[],
-            price:[]
-        }
-    }
-
+  state = {
+      grid:"",
+      limit:20,
+      skip:0,
+      filters: {
+        character:[],
+        publisher:[],
+        price:[]
+      }
+  }
 
     componentDidMount(){
         this.props.dispatch(getCharacters());
         this.props.dispatch(getPublishers());
+
+        
         this.props.dispatch(getProductsToShop(
-            this.state.limit,
             this.state.skip,
+            this.state.limit,
             this.state.filters
         ))
     }
 
     handlePrice = (value) => {
         const data = price;
-        let array = [];
+        var array = [];
 
         for(let key in data){
             if(data[key]._id === parseInt(value,10)){
