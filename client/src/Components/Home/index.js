@@ -21,13 +21,13 @@ class Home extends Component {
                 <HomeSlider/>
                 <CardBlock
                     list={this.props.products.bySell}
-                    title="Staff Picks"
+                    title="New Arrivals"
                 
                 />
                 <HomePromotion/>
                 <CardBlock
                     list={this.props.products.byArrival}
-                    title="New Arrivals"
+                    title="New Staff Picks"
                 
                 />
             </div>

@@ -513,6 +513,7 @@ footer .business_nfo .nfo {
 .card_item_wrapper .actions .button_wrapp:nth-child(1) {
     flex-grow: 1;
     padding-right: 10px;
+    
 }
 
 .card_item_wrapper.grid_bars {

@@ -54,7 +54,7 @@ const generateLinks = (links) => (
                     </div>
                     { props.user.userData.isAdmin ?
                         <div>
-                            <h2>Amin</h2>
+                            <h2>Admin</h2>
                             <div className="links">
                         {generateLinks(admin)}
 

@@ -3,9 +3,8 @@ const Schema = mongoose.Schema;
 
 const productSchema = mongoose.Schema({
     name:{
-    required: true,
+        required: true,
         type: String,
-        unique: 1,
         maxlength:100
     },
     character:{
@@ -45,7 +44,7 @@ const productSchema = mongoose.Schema({
         type: Array,
         default: []
     }
-}, {timestamps:true, collection: 'product'});
+}, {timestamps:true, collection: 'Product'});
 
 const Product = mongoose.model('Product', productSchema);
 module.exports = {Product}

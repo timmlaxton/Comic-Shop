@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import UserLayout from '../../../hoc/user';
 import FormField from '../../utils/Form/formfield';
-import { update, generateData, isFormValid, populateOptionFields } from '../../utils/Form/formActions';
+import { update, generateData, isFormValid, populateOptionFields, resetFields } from '../../utils/Form/formActions';
 
 import {connect} from 'react-redux'
-import {getCharacters, getPublishers, addProduct } from '../../../actions/products_actions'
+import {getCharacters, getPublishers, addProduct, clearProduct } from '../../../actions/products_actions'
 
 class AddProduct extends Component {
 
@@ -174,25 +174,35 @@ class AddProduct extends Component {
         })
     }
 
-    
-    
-    
+    resetFieldHandler = () => {
+        const newFormData = resetFields(this.state.formdata,'products');
 
+        this.setState({
+            formdata: newFormData,
+            formSuccess:true
+        });
+        setTimeout(()=>{
+            this.setState({
+                formSuccess: false
+            },()=>{
+                this.props.dispatch(clearProduct())
+            })
+        },3000)
+    }
+    
 
     submitForm= (event) =>{
         event.preventDefault();
         
-        let dataToSubmit = generateData(this.state.formdata,'products');
-        let formIsValid = isFormValid(this.state.formdata,'products')
+        var dataToSubmit = generateData(this.state.formdata,'products');
+        var formIsValid = isFormValid(this.state.formdata,'products')
 
         if(formIsValid){
             this.props.dispatch(addProduct(dataToSubmit)).then(()=>{
                 if( this.props.products.addProduct.success){
                     this.resetFieldHandler();
-
                 }else{
                     this.setState({formError: true})
-
                 }
             })
         } else {
@@ -209,18 +219,29 @@ class AddProduct extends Component {
         this.props.dispatch(getCharacters()).then( response => {
             const newFormData = populateOptionFields(formdata,this.props.products.characters, 'character');            
             this.updateFields(newFormData)
-            console.log(newFormData);
+            
             
         })
 
         this.props.dispatch(getPublishers()).then( response => {
             const newFormData = populateOptionFields(formdata,this.props.products.publishers, 'publisher');            
             this.updateFields(newFormData)
-            console.log(newFormData);
+            
             
         })
     }
 
+    imagesHandler = (images) => {
+        const newFormData = {
+            ...this.state.formdata
+        }
+        newFormData['images'].value = images;
+        newFormData['images'].valid = true;
+
+        this.setState({
+            formdata:  newFormData
+        })
+    }
 
     render() {
         return (
@@ -257,17 +278,15 @@ class AddProduct extends Component {
                        change={(element)=> this.updateForm(element)}
                      />
 
-                    <FormField
-                       id={'publisher'}
-                       formdata={this.state.formdata.publisher}
-                       change={(element)=> this.updateForm(element)}
-                     />
+                   
 
                     <FormField
                        id={'available'}
                        formdata={this.state.formdata.available}
                        change={(element)=> this.updateForm(element)}
                      />
+
+                    
 
                     <FormField
                        id={'shipping'}
@@ -278,7 +297,11 @@ class AddProduct extends Component {
 
                     <div className="form_devider"></div>
 
-                   
+                    <FormField
+                       id={'publisher'}
+                       formdata={this.state.formdata.publisher}
+                       change={(element)=> this.updateForm(element)}
+                     />
 
                     <FormField
                        id={'publish'}

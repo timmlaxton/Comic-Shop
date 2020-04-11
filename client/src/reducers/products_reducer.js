@@ -4,7 +4,8 @@ import {
     GET_CHARACTERS,
     GET_PUBLISHERS,
     GET_PRODUCTS_TO_SHOP,
-    ADD_PRODUCT
+    ADD_PRODUCT,
+    CLEAR_PRODUCT
 
     
 
@@ -31,6 +32,8 @@ export default function(state={},action){
                 }
         case ADD_PRODUCT: 
             return {...state, addProduct: action.payload}
+            case CLEAR_PRODUCT:
+            return {...state,addProduct: action.payload}
         default:
             return state;
 

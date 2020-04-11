@@ -6,8 +6,8 @@ const HomeSlider = (props) => {
 
     const slides = [
         {
-            img: 'images/featured/Batman.jpg',
-            lineOne: 'Trades',
+            img: 'images/featured/Fan4.jpg',
+            lineOne: 'Back Issues',
             lineTwo: '',
             linkTitle: 'Shop now',
             linkTo: '/shop'
@@ -18,6 +18,13 @@ const HomeSlider = (props) => {
             lineTwo: '',
             linkTitle: 'Shop now',
             linkTo: '/shop'
+        },
+        {
+            img: 'images/featured/Strange.jpg',
+            lineOne: 'New Comics',
+            lineTwo: '',
+            linkTitle: 'Shop now',
+            linkTo: '/shop'
         }
     ]
 
@@ -25,7 +32,7 @@ const HomeSlider = (props) => {
 const settings = {
     dots: false,
     infinite: true,
-    speed: 100,
+    speed: 600,
     slideToShow: 1,
     slideToScroll: 1,
     arrows: false

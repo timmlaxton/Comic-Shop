@@ -1,20 +1,17 @@
-
-
-export const validate = (element, formdata = []) => {
-    var error = [true, ''];
+export const validate = (element, formdata= []) => {
+    let error = [true,''];
 
 
     if(element.validation.email){
         const valid = /\S+@\S+\.\S+/.test(element.value)
-        const message = `${!valid ? 'Must be a valid email' : ''}`;
+        const message = `${!valid ? 'Must be a valid email':''}`;
         error = !valid ? [valid,message] : error;
-
     }
 
     if(element.validation.confirm){
         const valid = element.value.trim() === formdata[element.validation.confirm].value;
-        const message = `${!valid ? 'Passwords do not match' : ''}`;
-        error = !valid ? [valid,message] : error; 
+        const message = `${!valid ? 'Passwords do not match':''}`;
+        error = !valid ? [valid,message] : error;
     }
 
     if(element.validation.required){
@@ -22,57 +19,51 @@ export const validate = (element, formdata = []) => {
         const message = `${!valid ? 'This field is required':''}`;
         error = !valid ? [valid,message] : error;
     }
+
     return error
 }
 
-   
-
-
-export const update = (element, formdata, formName) => {
+export const update = (element, formdata, formName ) => {
     const newFormdata = {
         ...formdata
     }
-
     const newElement = {
-    ...newFormdata[element.id]
+        ...newFormdata[element.id]
     }
 
     newElement.value = element.event.target.value;
 
     if(element.blur){
-        var validData = validate(newElement, formdata);
+        let validData = validate(newElement,formdata);
         newElement.valid = validData[0];
-        newElement.validiationMessage = validData[1];
-     }
+        newElement.validationMessage = validData[1];
+    }
 
     newElement.touched = element.blur;
-    newFormdata[element.id]= newElement;
+    newFormdata[element.id] = newElement;
 
     return newFormdata;
-
-
 }
 
-export const generateData = (formdata, formName) => {
-    var dataToSubmit = {};
+export const generateData = (formdata, formName) =>{
+    let dataToSubmit = {};
 
-    for(var key in formdata){
+    for(let key in formdata){
         if(key !== 'confirmPassword'){
-        dataToSubmit[key] = formdata[key].value;
-            }
+            dataToSubmit[key] = formdata[key].value;
         }
-    
+    }
 
     return dataToSubmit;
 }
 
-    export const isFormValid = (formdata, formName) => {
-        var formIsValid = true;
+export const isFormValid = (formdata, formName) => {
+    let formIsValid = true;
 
-        for(var key in formdata){
-            formIsValid = formdata[key].valid && formIsValid
-        }
-        return formIsValid;
+    for(let key in formdata){
+        formIsValid = formdata[key].valid && formIsValid
+    }
+    return formIsValid;
 }
 
 export const populateOptionFields= (formdata, arrayData =[],field) => {
@@ -85,4 +76,22 @@ export const populateOptionFields= (formdata, arrayData =[],field) => {
 
     newFormdata[field].config.options = newArray;
     return newFormdata;
+}
+
+export const resetFields = (formdata, formName)=>{
+    const newFormdata = {...formdata};
+
+    for(let key in newFormdata){
+        if(key === 'images'){
+            newFormdata[key].value = [];
+        }else{
+            newFormdata[key].value = '';
+        }
+
+        newFormdata[key].valid = false;
+        newFormdata[key].touched = false;
+        newFormdata[key].validationMessage = '';
+    }
+
+    return newFormdata
 }

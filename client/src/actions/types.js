@@ -9,3 +9,5 @@ export const GET_CHARACTERS = 'get_characters';
 export const GET_PUBLISHERS = 'get_publishers';
 export const GET_PRODUCTS_TO_SHOP = 'get_products_to_shop';
 export const ADD_PRODUCT = "add_product"
+export const CLEAR_PRODUCT = 'clear_product'
+

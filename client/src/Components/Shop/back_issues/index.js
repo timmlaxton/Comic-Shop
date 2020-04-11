@@ -21,8 +21,8 @@ class BackIssues extends Component {
         limit:6,
         skip:0,
         filters:{
-            character:[],
-            publisher:[],
+            characters:[],
+            publishers:[],
             price:[]
         }
     }
@@ -51,13 +51,13 @@ class BackIssues extends Component {
     }
 
 
-    handleFilters = (filters,catergory) => {
+    handleFilters = (filters,category) => {
        const newFilters = {...this.state.filters}
-       newFilters[catergory] = filters;
+       newFilters[category] = filters;
 
-        if(catergory === "price"){
+        if(category === "price"){
             var priceValues = this.handlePrice(filters);
-            newFilters[catergory] = priceValues
+            newFilters[category] = priceValues
         }
 
        this.showFilteredResults(newFilters)
@@ -101,6 +101,8 @@ class BackIssues extends Component {
 
 
     render() {
+        console.log(this.state.filters);
+        
         const products = this.props.products;
         return (
             <div>
@@ -125,12 +127,13 @@ class BackIssues extends Component {
                             handleFilters={(filters)=> this.handleFilters(filters, 'publisher')}
                            /> 
 
+
                             <CollapseRadio
                             initState={true}
                             title="Price"
                             list={price}
-                            handleFilters={(filters)=> this.handleFilters(filters, 'price')}
-                           /> 
+                            handleFilters={(filters)=> this.handleFilters(filters,'price')}
+                            />
 
 
 
