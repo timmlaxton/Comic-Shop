@@ -17,7 +17,7 @@ class Fileupload extends Component {
     
     onDrop = (files) => {
         this.setState({uploading:true});
-        let formData = new FormData();
+        var formData = new FormData();
         const config = {
             header: {'content-type':'multipart/form-data'}
         }
@@ -51,7 +51,8 @@ class Fileupload extends Component {
             <div>
                 <section>
                     <div className="dropzone clear">
-                    <Dropzone  onDrop={(e)=>this.onDrop(e)}
+                    <Dropzone  
+                            onDrop={(e)=>this.onDrop(e)}
                             multiple={false}
                             className="dropzone_box"
                         >  
