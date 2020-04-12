@@ -15,10 +15,30 @@ class Fileupload extends Component {
         }
     }
     
-        onDrop = (files) => {
-            console.log(files);
-            
+    onDrop = (files) => {
+        this.setState({uploading:true});
+        let formData = new FormData();
+        const config = {
+            header: {'content-type':'multipart/form-data'}
         }
+        formData.append("file",files[0]);
+ 
+        axios.post('/api/users/uploadimage',formData,config)
+        .then(response => {
+ 
+             console.log(response.data)
+ 
+             this.setState({
+                 uploading:false,
+                 uploadedFiles:[
+                     ...this.state.uploadedFiles,
+                     response.data
+                 ]
+             },()=>{
+                 this.props.imagesHandler(this.state.uploadedFiles)
+             })
+        });
+     }
     
         showUploadedImages = () => {
 
@@ -57,7 +77,7 @@ class Fileupload extends Component {
                                 paddingTop: '60px'
                             }}>
                                 <CircularProgress
-                                    style={{color:'#00bcd4'}}
+                                    style={{color:"black"}}
                                     thickness={7}
                                 />
                             </div>
