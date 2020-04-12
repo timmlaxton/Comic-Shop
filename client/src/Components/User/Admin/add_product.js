@@ -79,12 +79,30 @@ class AddProduct extends Component {
                 validationMessage:'',
                 showlabel: true
             },
-            available: {
+            issue: {
+                element: 'input',
+                value: '',
+                config:{
+                    label: 'issue number',
+                    name: 'issue_input',
+                    type: 'number',
+                    placeholder: 'Enter issue number'
+                },
+                validation:{
+                    required: true
+                },
+                valid: false,
+                touched: false,
+                validationMessage:'',
+                showlabel: true
+
+            },
+            shipping: {
                 element: 'select',
                 value: '',
                 config:{
-                    label: 'Available, in stock',
-                    name: 'available_input',
+                    label: 'Shipping',
+                    name: 'shipping_input',
                     options:[
                         {key:true,value:'Yes'},
                         {key:false,value:'No'},
@@ -98,12 +116,12 @@ class AddProduct extends Component {
                 validationMessage:'',
                 showlabel: true
             },
-            shipping: {
+            available: {
                 element: 'select',
                 value: '',
                 config:{
-                    label: 'Shipping',
-                    name: 'shipping_input',
+                    label: 'Available, in stock',
+                    name: 'available_input',
                     options:[
                         {key:true,value:'Yes'},
                         {key:false,value:'No'},
@@ -134,8 +152,6 @@ class AddProduct extends Component {
                 validationMessage:'',
                 showlabel: true
             },
-            
-            
             publish: {
                 element: 'select',
                 value: '',
@@ -243,6 +259,8 @@ class AddProduct extends Component {
         })
     }
 
+   
+
     render() {
         return (
             <UserLayout>
@@ -250,6 +268,8 @@ class AddProduct extends Component {
                    <h1>Add product</h1>
 
                    <form onSubmit={(event)=> this.submitForm(event)}>
+
+                 
                    
                    <FormField
                        id={'name'}
@@ -278,6 +298,17 @@ class AddProduct extends Component {
                        change={(element)=> this.updateForm(element)}
                      />
 
+                    <FormField
+                       id={'issue'}
+                       formdata={this.state.formdata.issue}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                    <FormField
+                       id={'shipping'}
+                       formdata={this.state.formdata.shipping}
+                       change={(element)=> this.updateForm(element)}
+                     />
                    
 
                     <FormField
@@ -287,13 +318,6 @@ class AddProduct extends Component {
                      />
 
                     
-
-                    <FormField
-                       id={'shipping'}
-                       formdata={this.state.formdata.shipping}
-                       change={(element)=> this.updateForm(element)}
-                     />
-
 
                     <div className="form_devider"></div>
 
@@ -317,8 +341,8 @@ class AddProduct extends Component {
 
                         {this.state.formError ?
                             <div className="error_label">
-                                Please check your data
-                                        </div>
+                                Nope
+                            </div>
                             : null}
                         <button onClick={(event) => this.submitForm(event)}>
                             Add product
