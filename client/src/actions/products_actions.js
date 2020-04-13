@@ -6,6 +6,7 @@ import {
         GET_CHARACTERS,
         ADD_CHARACTER,
         GET_PUBLISHERS,
+        ADD_PUBLISHER,
         GET_PRODUCTS_TO_SHOP,
         ADD_PRODUCT,
         CLEAR_PRODUCT
@@ -81,7 +82,7 @@ export function  getCharacters(){
 export function addCharacter(dataToSubmit, existingCharacters){
     const request = axios.post(`${PRODUCT_SERVER}/character`,dataToSubmit)
     .then(response=>{
-        let characters = [
+        var characters = [
             ...existingCharacters,
             response.data.character
         ];
@@ -114,5 +115,23 @@ export function clearProduct(){
     return {
         type: CLEAR_PRODUCT,
         payload: ''
+    }
+}
+
+export function addPublisher(dataToSubmit, existingPublishers){
+    const request = axios.post(`${PRODUCT_SERVER}/publisher`,dataToSubmit)
+    .then(response=>{
+        var publishers = [
+            ...existingPublishers,
+            response.data.publisher
+        ];
+        return {
+            success: response.data.success,
+            publishers
+        }
+    });
+    return {
+        type: ADD_PUBLISHER,
+        payload: request
     }
 }

@@ -97,7 +97,7 @@ render() {
                     </div>
                 </div>
                     <div className="right">
-                        
+
                 <form onSubmit={(event)=> this.submitForm(event)}>
 
                 <FormField
@@ -112,7 +112,7 @@ render() {
                             </div>
                             : null}
                         <button onClick={(event) => this.submitForm(event)}>
-                            Add character
+                            Add publisher
                         </button>
 
                 </form>

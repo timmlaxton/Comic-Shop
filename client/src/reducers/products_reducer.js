@@ -4,6 +4,7 @@
     GET_CHARACTERS,
     ADD_CHARACTER,
     GET_PUBLISHERS,
+    ADD_PUBLISHER,
     GET_PRODUCTS_TO_SHOP,
     ADD_PRODUCT,
     CLEAR_PRODUCT
@@ -36,6 +37,10 @@ export default function(state={},action){
                 }
         case ADD_PRODUCT: 
             return {...state, addProduct: action.payload}
+            case CLEAR_PRODUCT:
+            return {...state,addProduct: action.payload}
+        case ADD_PUBLISHER: 
+            return {...state, addPublisher: action.payload}
             case CLEAR_PRODUCT:
             return {...state,addProduct: action.payload}
         default:
