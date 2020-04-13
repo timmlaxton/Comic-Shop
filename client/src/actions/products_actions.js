@@ -4,10 +4,12 @@ import {
         GET_PRODUCTS_BY_SELL,
         GET_PRODUCTS_BY_ARRIVAL,
         GET_CHARACTERS,
+        ADD_CHARACTER,
         GET_PUBLISHERS,
         GET_PRODUCTS_TO_SHOP,
         ADD_PRODUCT,
         CLEAR_PRODUCT
+
        
     } from './types';
 
@@ -75,6 +77,28 @@ export function  getCharacters(){
         payload: request
     }
 } 
+
+export function addCharacter(dataToSubmit, existingCharacters){
+    const request = axios.post(`${PRODUCT_SERVER}/character`,dataToSubmit)
+    .then(response=>{
+        let characters = [
+            ...existingCharacters,
+            response.data.character
+        ];
+        return {
+            success: response.data.success,
+            characters
+        }
+    });
+    return {
+        type: ADD_CHARACTER,
+        payload: request
+    }
+}
+
+
+
+
 
 export function  getPublishers(){
     const request = axios.get(`${PRODUCT_SERVER}/publishers`)

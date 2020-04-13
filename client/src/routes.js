@@ -10,6 +10,7 @@ import Trades from './components/Shop/trades'
 import Home from "./components/Home";
 import RegisterLogin from './components/Register_login';
 import Register from './components/Register_login/register';
+import ManageCatergories from './components/User/Admin/manage_catergories';
 
 
 import UserDashboard from './components/User';
@@ -22,6 +23,7 @@ const Routes = () => {
 
       <Route path="/user/dashboard" exact component={Auth(UserDashboard,true)}/>
       <Route path="/admin/add_product" exact component={Auth(AddProduct,true)}/>
+      <Route path="/admin/manage_catergories" exact component={Auth(ManageCatergories,true)}/>
 
 
 
