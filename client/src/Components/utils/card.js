@@ -41,19 +41,19 @@ class Card extends Component {
                             </p>
                     </div>
                 :null
-
-                }<div className="actions">
-                    <div className="button_wrap">
-                        <MyButton
+                } 
+                
+                <div className="actions">
+                 <div className="button_wrapp">
+                    <MyButton
                         type="default"
                         altClass="card_link"
                         title="View product"
-                        linkto={`/product_detail/${props._id}`}
-                        addStyles= {{
-                            margin: '10px 0 0 0 '
+                        linkTo={`/product_detail/${props._id}`}
+                        addStyles={{
+                            margin: '10px 0 0 0'
                         }}
-                        
-                        />
+                    />
 
                     </div>
                     <div className="button_wrapp">

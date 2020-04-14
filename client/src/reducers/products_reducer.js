@@ -7,7 +7,9 @@
     ADD_PUBLISHER,
     GET_PRODUCTS_TO_SHOP,
     ADD_PRODUCT,
-    CLEAR_PRODUCT
+    CLEAR_PRODUCT,
+    GET_PRODUCT_DETAIL,
+    CLEAR_PRODUCT_DETAIL
 
     
 
@@ -40,11 +42,14 @@ export default function(state={},action){
             case CLEAR_PRODUCT:
             return {...state,addProduct: action.payload}
         case ADD_PUBLISHER: 
-            return {...state, addPublisher: action.payload}
-            case CLEAR_PRODUCT:
-            return {...state,addProduct: action.payload}
+            return {...state, addPublisher: action.payload,
+                    publisher:action.payload.publihers}
+        case GET_PRODUCT_DETAIL:
+            return {...state, prodDetail: action.payload }
+        case CLEAR_PRODUCT_DETAIL:
+            return {...state, prodDetail: action.payload }
         default:
-            return state;
+             return state;
 
     }
 }

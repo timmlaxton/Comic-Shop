@@ -105,11 +105,11 @@ app.get('/api/product/articles', (req,res)=> {
 })
 
 app.get('/api/product/articles_by_id',(req,res)=>{
-    let type = req.query.type;
-    let items = req.query.id;
+    var type = req.query.type;
+    var items = req.query.id;
 
     if(type === "array"){
-        let ids = req.query.id.split(',');
+        var ids = req.query.id.split(',');
         items = [];
         items = ids.map(item=>{
             return mongoose.Types.ObjectId(item)
@@ -119,7 +119,7 @@ app.get('/api/product/articles_by_id',(req,res)=>{
     Product.
     find({ '_id':{$in:items}}).
     populate('character').
-    populated('publisher').
+    populate('publisher').
     exec((err,docs)=>{
         return res.status(200).send(docs)
     })
