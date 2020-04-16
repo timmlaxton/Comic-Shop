@@ -319,6 +319,37 @@ app.post('/api/users/addToCart',auth,(req,res)=>{
     })
 })
 
+app.get('/api/users/removeFromCart', auth,(req,res)=>{
+ 
+    User.findOneAndUpdate(
+        {_id: req.user._id},
+        {"$pull":
+    {"cart": {"id":mongoose.Types.ObjectId(req.query._id)}}
+        },
+        {new: true},
+        (err,doc)=>{
+            var cart = doc.cart;
+            var array = cart.map(item=>{
+                return mongoose.Types.ObjectId(item.id)
+            });
+
+            Product.
+            find({'_id':{$in: array}}).
+            populate('character').
+            populate('publisher').
+            exec((err,cartDetail)=>{
+                return res.status(200).json({
+                    cartDetail,
+                    cart
+                })
+            })
+
+        }
+    );
+
+
+})
+
 const port = process.env.PORT || 3002;
 app.listen(port, ()=> {
     console.log(`Server running at ${port}`)
