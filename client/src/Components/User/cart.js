@@ -50,7 +50,8 @@ class UserCart extends Component {
         var total = 0;
 
         cartDetail.forEach(item=>{
-            total += parseInt(item.price, 10) * item.quantity
+            total += parseFloat(item.price) * item.quantity
+            
         });
 
         this.setState({
@@ -96,6 +97,10 @@ class UserCart extends Component {
 
     }
 
+    
+      
+
+
     render() {
         return (
             <UserLayout>
@@ -106,7 +111,9 @@ class UserCart extends Component {
                             products={this.props.user}
                             type="cart"
                             removeItem={(id)=> this.removeFromCart(id)}
+                            
                         />
+                        
                         { this.state.showTotal ?
                             <div>
                                 <div className="user_cart_sum">
@@ -130,6 +137,9 @@ class UserCart extends Component {
                             :
                             this.showNoItemMessage()
                         }
+
+                        
+
                     </div>
                     {
                         this.state.showTotal ?
@@ -145,6 +155,8 @@ class UserCart extends Component {
                         :null
                     }
 
+
+
                 </div>
             </UserLayout>
            
@@ -159,3 +171,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(UserCart);
+
+
+

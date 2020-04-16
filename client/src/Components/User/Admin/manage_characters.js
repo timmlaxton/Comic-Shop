@@ -112,7 +112,7 @@ render() {
                             </div>
                             : null}
                         <button onClick={(event) => this.submitForm(event)}>
-                            Add publisher
+                            Add character
                         </button>
 
                 </form>

@@ -526,6 +526,7 @@ footer .business_nfo .nfo {
     width: 300px;
     height: 211px;
     border: none;
+    object-fit:scale-down !important;
 
 }
 

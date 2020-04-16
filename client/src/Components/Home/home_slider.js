@@ -10,21 +10,21 @@ const HomeSlider = (props) => {
             lineOne: 'Back Issues',
             lineTwo: '',
             linkTitle: 'Shop now',
-            linkTo: '/shop'
+            linkTo: '/back_issues'
         },
         {
             img: 'images/featured/Criminal1.jpg',
             lineOne: 'Trades',
             lineTwo: '',
             linkTitle: 'Shop now',
-            linkTo: '/shop'
+            linkTo: '/trades'
         },
         {
             img: 'images/featured/Strange.jpg',
             lineOne: 'New Comics',
             lineTwo: '',
             linkTitle: 'Shop now',
-            linkTo: '/shop'
+            linkTo: '/new_comics'
         }
     ]
 
