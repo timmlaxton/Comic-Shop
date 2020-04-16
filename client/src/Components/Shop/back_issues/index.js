@@ -43,7 +43,7 @@ class BackIssues extends Component {
         const data = price;
         var array = [];
 
-        for(let key in data){
+        for(var key in data){
             if(data[key]._id === parseInt(value,10)){
                 array = data[key].array
             }
@@ -80,7 +80,7 @@ class BackIssues extends Component {
     }
 
     loadMoreCards = () => {
-        let skip = this.state.skip + this.state.limit;
+        var skip = this.state.skip + this.state.limit;
 
         this.props.dispatch(getProductsToShop(
             skip,
@@ -102,7 +102,6 @@ class BackIssues extends Component {
 
 
     render() {
-        console.log(this.state.filters);
         
         const products = this.props.products;
         return (
