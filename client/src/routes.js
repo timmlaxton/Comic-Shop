@@ -17,6 +17,7 @@ import UserDashboard from './components/User';
 import AddProduct from './components/User/Admin/add_product'
 import ManageCatergories from './components/User/Admin/manage_catergories';
 import UserCart from './components/User/cart';
+import UpdateProfile from './components/User/update_profile';
 
 
 const Routes = () => {
@@ -28,6 +29,8 @@ const Routes = () => {
       <Route path="/user/cart" exact component={Auth(UserCart,true)}/>
       <Route path="/admin/add_product" exact component={Auth(AddProduct,true)}/>
       <Route path="/admin/manage_catergories" exact component={Auth(ManageCatergories,true)}/>
+      <Route path="/user/user_profile" exact component={Auth(UpdateProfile,true)}/>
+
 
 
       <Route path="/product_detail/:id" exact component={Auth(ProductPage,null)}/>
@@ -37,6 +40,7 @@ const Routes = () => {
       <Route path="/back_issues" exact component={Auth(BackIssues,null)}/>
       <Route path="/trades" exact component={Auth(Trades,null)}/>
       <Route path="/new_comics" exact component={Auth(NewComics,null)}/>
+
       
     </Switch>
     </Layout>
