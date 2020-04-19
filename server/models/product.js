@@ -32,6 +32,11 @@ const productSchema = mongoose.Schema({
         ref: 'Publisher',
         required: true
     },
+    sold:{
+        type: Number,
+        maxlength: 100,
+        default: 0
+    },
     shipping: {
         required: true,
         type: Boolean

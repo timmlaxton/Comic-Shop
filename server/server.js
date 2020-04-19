@@ -23,11 +23,11 @@ cloudinary.config({
     api_secret:process.env.CLOUD_API_SECRET
 })
 
-// Middleware
+
 const { auth } = require('./middleware/auth');
 const {admin} = require('./middleware/admin');
 
-//Models//
+
 const {User} = require('./models/user');
 const {Publisher} = require('./models/publisher');
 const {Product} = require('./models/product');
@@ -353,11 +353,11 @@ app.get('/api/users/removeFromCart', auth,(req,res)=>{
 })
 
 
-app.post('/api/users/successBuy', auth,(res, req)=>{
+app.post('/api/users/successBuy', auth,(req, res)=>{
     var history = [];
     var transactionData = {}
 
-    req.body.cardDetail.forEach((item)=>{
+    req.body.cartDetail.forEach((item)=>{
         history.push({
             dateOfPurchase: Date.now(),
             name: item.name,
@@ -390,38 +390,34 @@ app.post('/api/users/successBuy', auth,(res, req)=>{
                 if(err) return res.json({success:false,err});
                 var products = [];
                 doc.product.forEach(item=>{
-                    products.push({id:item,id,quantity: item.quantity})
+                    products.push({id:item.id,quantity: item.quantity})
                 })
 
 
-                async.eachOfSeries(products,(item,callback)=>{
+                async.eachSeries(products,(item,callback)=>{ 
                     Product.update(
                         {_id: item.id},
-                        {$inc:{
+                        { $inc:{
                             "sold": item.quantity
                         }},
                         {new:false},
                         callback
                     )
-
                 },(err)=>{
                     if(err) return res.json({success:false,err})
                     res.status(200).json({
                         success:true,
                         cart: user.cart,
-                        catDetail:[]
+                        cartDetail:[]
                     })
-                })   
+                })
             });
-
         }
     )
-
 })
+
 
 const port = process.env.PORT || 3002;
-app.listen(port, ()=> {
-    console.log(`Server running at ${port}`)
-    
+app.listen(port,()=>{
+    console.log(`Server Running at ${port}`)
 })
-
