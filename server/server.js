@@ -31,6 +31,7 @@ const {User} = require('./models/user');
 const {Publisher} = require('./models/publisher');
 const {Product} = require('./models/product');
 const {Character} = require('./models/character');
+const {Payment} =require('./models/payment');
 
 app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -350,8 +351,39 @@ app.get('/api/users/removeFromCart', auth,(req,res)=>{
 
 })
 
+
+app.post('/api/users/successBuy', auth,(res, req)=>{
+    var history = [];
+    var transactionData = {}
+
+    req.body.cardDetail.forEach((item)=>{
+        history.push({
+            dateOfPurchase: Date.now(),
+            name: item.name,
+            character: item.character.name,
+            id: item._id,
+            price: item.price,
+            quantity: item.quantity,
+            paymentId: req.body.paymentData.paymentID
+        })
+    })
+
+    transactionData.user = {
+        id: req.user._id,
+        name: req.user.name,
+        lastname: req.user.lastname,
+        email: req.user.email
+    }
+    transactionData.data = req.body.paymentData;
+    transactionData.product = history;
+
+
+    
+})
+
 const port = process.env.PORT || 3002;
 app.listen(port, ()=> {
     console.log(`Server running at ${port}`)
     
 })
+
