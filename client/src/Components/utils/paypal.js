@@ -6,8 +6,32 @@ class Paypal extends Component {
 
 
         const onSuccess = (payment) => {
-            console.log(JSON.stringify(payment));            
+            //console.log(JSON.stringify(payment));     
+
+            this.props.onSuccess(payment)
+            
+            //{"paid":true,
+            //"cancelled":false,
+            //"payerID":"UY6SA44JSLD9C",
+            //"paymentID":"PAYID-L2OBJAI4P118763K96993245",
+            //"paymentToken":"EC-06980915JD6490325",
+            //"returnUrl":"https://www.paypal.com/checkoutnow/error?paymentId=PAYID-L2OBJAI4P118763K96993245&token=EC-06980915JD6490325&PayerID=UY6SA44JSLD9C",
+            //"address":{
+            //"recipient_name":"John Doe",
+             //"line1":"WOLVERHAMPTON QUEENS SQ",
+             //"city":"LEICESTER","state":"LEICESTERSHIRE",
+            //"postal_code":"LE87 2BB","country_code":"GB"},
+             //"email":"sb-ed447n1502315@business.example.com"}
+
+
+
+
+
         }
+
+
+
+
 
         const onCancel = (data) => {
             console.log(JSON.stringify(data))
@@ -18,14 +42,17 @@ class Paypal extends Component {
 
         }
 
-        const env = 'sandbox';
-        const currency = 'GBP';
-        const total = this.props.toPay;
+        var env = 'sandbox';
+        var currency = 'GBP';
+        var total = this.props.toPay;
 
         const client = {
-            sandbox:'AfbA2-qjz92KhC5IDxvx2UpiIDBmSD7PdlKkZk1-OndNwg7Wc5wVAJKlPWQJcHwioMFz0kn4zOXnbqGW',
+            sandbox:'AQ2A_QemxBJ_6VjiQuSiOCtoqfjwdLGZusiAWWTNBAHNrxC9PVjALgOlHEpHA9Qn8pbQSrDbOwD25OTc',
             production: ''
         }
+
+
+
 
         return (
             <div>

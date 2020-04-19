@@ -11,6 +11,9 @@ import faSmile from '@fortawesome/fontawesome-free-solid/faSmile'
 
 import Paypal from '../utils/paypal'
 
+// AQ2A_QemxBJ_6VjiQuSiOCtoqfjwdLGZusiAWWTNBAHNrxC9PVjALgOlHEpHA9Qn8pbQSrDbOwD25OTc
+
+
 class UserCart extends Component {
 
 
@@ -85,16 +88,22 @@ class UserCart extends Component {
         </div>
     )
 
-    transactionError = () => {
+    transactionError = (data) => {
+        console.log('paypal error')
+        //login register code to be used here
+    }
+
+    transactionCancelled = (data) => {
+        console.log('paypal error')
+        //login register code to be used here
 
     }
 
-    transactionCancelled = () => {
-
-    }
-
-    transactionSuccess = () => {
-
+    transactionSuccess = (data) => {
+        this.setState({
+            showTotal: false,
+            showSuccess: true
+        })
     }
 
     
