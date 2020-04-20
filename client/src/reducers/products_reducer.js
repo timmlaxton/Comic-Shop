@@ -9,7 +9,9 @@
     ADD_PRODUCT,
     CLEAR_PRODUCT,
     GET_PRODUCT_DETAIL,
-    CLEAR_PRODUCT_DETAIL
+    CLEAR_PRODUCT_DETAIL,
+    GET_SHIRTS,
+    ADD_SHIRT
 
     
 
@@ -48,6 +50,11 @@ export default function(state={},action){
             return {...state, prodDetail: action.payload }
         case CLEAR_PRODUCT_DETAIL:
             return {...state, prodDetail: action.payload }
+            case GET_SHIRTS:
+                return {...state, shirts: action.payload}
+            case ADD_SHIRT:
+                return {...state, addshirt: action.payload.success , 
+                                shirts: action.payload.shirts}
         default:
              return state;
 

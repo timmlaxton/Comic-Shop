@@ -33,6 +33,9 @@ const {Publisher} = require('./models/publisher');
 const {Product} = require('./models/product');
 const {Character} = require('./models/character');
 const {Payment} =require('./models/payment');
+const {Site} =require ('./models/site');
+const {Shirt} =require ('./models/shirt');
+
 
 app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -73,6 +76,7 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
     find(findArgs).
     populate('character').
     populate('publisher').
+    populate('shirt').
     sort([[sortBy,order]]).
     skip(skip).
     limit(limit). 
@@ -97,6 +101,7 @@ app.get('/api/product/articles', (req,res)=> {
     Product.find().
     populate('character').
     populate('publisher').
+    populate('shirt').
     sort([[sortBy,order]]).
     limit(limit).
     exec((err,articles)=>{
@@ -122,6 +127,7 @@ app.get('/api/product/articles_by_id',(req,res)=>{
     find({ '_id':{$in:items}}).
     populate('character').
     populate('publisher').
+    populate('shirt').
     exec((err,docs)=>{
         return res.status(200).send(docs)
     })
@@ -182,6 +188,27 @@ app.get('/api/product/publishers', (req,res)=> {
     })
 });
 
+
+//TShirt
+app.post('/api/product/shirt',auth,admin,(req,res)=>{
+    const shirt = new Shirt(req.body);
+
+    shirt.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success: true,
+            shirt:doc
+        })
+    })
+});
+
+
+app.get('/api/product/shirts', (req,res)=> {
+    Shirt.find({},(err, shirts)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).send(shirts)
+    })
+});
 
 
 

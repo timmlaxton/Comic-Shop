@@ -20,6 +20,8 @@ export const ADD_PUBLISHER = 'add_publisher';
 export const GET_PRODUCTS_TO_SHOP = 'get_products_to_shop';
 export const ADD_PRODUCT = "add_product"
 export const CLEAR_PRODUCT = 'clear_product'
+export const GET_SHIRTS = 'get_shirts'
+export const ADD_SHIRT = 'add_shirt'
 export const GET_PRODUCT_DETAIL = 'get_product_detail'
 export const CLEAR_PRODUCT_DETAIL = 'clear_product_detail'
 

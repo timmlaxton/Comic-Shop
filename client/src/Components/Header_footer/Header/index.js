@@ -33,7 +33,13 @@ state = {
             linkTo:'/new_comics',
             public: true
             
-        }
+        },
+        {
+            name: "Shirts",
+            linkTo:'/t_shirts',
+            public: true
+            
+        },
     ],
     user:[
         {

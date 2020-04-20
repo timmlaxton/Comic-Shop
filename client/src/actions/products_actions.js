@@ -7,6 +7,8 @@ import {
         ADD_CHARACTER,
         GET_PUBLISHERS,
         ADD_PUBLISHER,
+        GET_SHIRTS,
+        ADD_SHIRT,
         GET_PRODUCTS_TO_SHOP,
         ADD_PRODUCT,
         CLEAR_PRODUCT,
@@ -158,6 +160,36 @@ export function addPublisher(dataToSubmit, existingPublishers){
     });
     return {
         type: ADD_PUBLISHER,
+        payload: request
+    }
+}
+
+export function  getShirts(){
+    const request = axios.get(`${PRODUCT_SERVER}/shirts`)
+    .then(response => response.data)
+
+    return {
+        type: GET_SHIRTS,
+        payload: request
+    }
+} 
+
+
+
+export function addShirt(dataToSubmit, existingShirts){
+    const request = axios.post(`${PRODUCT_SERVER}/shirt`,dataToSubmit)
+    .then(response=>{
+        var shirts = [
+            ...existingShirts,
+            response.data.shirt
+        ];
+        return {
+            success: response.data.success,
+            shirts
+        }
+    });
+    return {
+        type: ADD_SHIRT,
         payload: request
     }
 }

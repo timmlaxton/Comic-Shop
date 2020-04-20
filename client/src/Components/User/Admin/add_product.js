@@ -5,7 +5,7 @@ import { update, generateData, isFormValid, populateOptionFields, resetFields } 
 import FileUpload from '../../utils/Form/fileupload';
 
 import {connect} from 'react-redux'
-import {getCharacters, getPublishers, addProduct, clearProduct } from '../../../actions/products_actions'
+import {getCharacters, getPublishers, addProduct, clearProduct, getShirts } from '../../../actions/products_actions'
 
 class AddProduct extends Component {
 
@@ -172,6 +172,23 @@ class AddProduct extends Component {
                 validationMessage:'',
                 showlabel: true
             },
+            shirt: {
+                element: 'select',
+                value: '',
+                config:{
+                    label: 'Shirt',
+                    name: 'shirt_input',
+                    options:[]
+                    
+                },
+                validation:{
+                    required: true
+                },
+                valid: false,
+                touched: false,
+                validationMessage:'',
+                showlabel: true
+            },
             images:{
                 value:[],
                 validation:{
@@ -252,6 +269,13 @@ class AddProduct extends Component {
 
         this.props.dispatch(getPublishers()).then( response => {
             const newFormData = populateOptionFields(formdata,this.props.products.publishers, 'publisher');            
+            this.updateFields(newFormData)
+            
+            
+        })
+
+        this.props.dispatch(getShirts()).then( response => {
+            const newFormData = populateOptionFields(formdata,this.props.products.shirts, 'shirt');            
             this.updateFields(newFormData)
             
             
@@ -339,6 +363,12 @@ class AddProduct extends Component {
                     <FormField
                        id={'publisher'}
                        formdata={this.state.formdata.publisher}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                    <FormField
+                       id={'shirt'}
+                       formdata={this.state.formdata.shirt}
                        change={(element)=> this.updateForm(element)}
                      />
 

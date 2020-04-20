@@ -4,7 +4,7 @@ const Formfield = ({formdata, change, id}) => {
 
 
     const showError = () => {
-        let errorMessage = null;
+        var errorMessage = null;
 
         if(formdata.validation && !formdata.valid){
             errorMessage = (

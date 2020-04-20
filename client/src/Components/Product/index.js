@@ -24,7 +24,7 @@ class ProductPage extends Component {
         componentWillUnmount(){
             this.props.dispatch(clearProductDetail())
         }
-
+ 
         addToCartHandler(id){
             this.props.dispatch(addToCart(id))
         }

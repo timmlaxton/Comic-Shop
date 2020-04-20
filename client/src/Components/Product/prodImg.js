@@ -14,7 +14,7 @@ class ProdImg extends Component {
 
     componentDidMount(){
         if(this.props.detail.images.length > 0){
-            let lightboxImages = [];
+            var lightboxImages = [];
 
             this.props.detail.images.forEach(item=>{
                 lightboxImages.push(item.url)
