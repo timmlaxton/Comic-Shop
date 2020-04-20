@@ -76,7 +76,6 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
     find(findArgs).
     populate('character').
     populate('publisher').
-    populate('shirt').
     sort([[sortBy,order]]).
     skip(skip).
     limit(limit). 
@@ -91,7 +90,7 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
     })
 })
 
-
+// By Sell
 app.get('/api/product/articles', (req,res)=> {
 
     var order = req.query.order ? req.query.order : "asc";
@@ -101,7 +100,6 @@ app.get('/api/product/articles', (req,res)=> {
     Product.find().
     populate('character').
     populate('publisher').
-    populate('shirt').
     sort([[sortBy,order]]).
     limit(limit).
     exec((err,articles)=>{
@@ -127,7 +125,6 @@ app.get('/api/product/articles_by_id',(req,res)=>{
     find({ '_id':{$in:items}}).
     populate('character').
     populate('publisher').
-    populate('shirt').
     exec((err,docs)=>{
         return res.status(200).send(docs)
     })

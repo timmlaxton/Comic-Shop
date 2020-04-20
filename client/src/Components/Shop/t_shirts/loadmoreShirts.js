@@ -7,7 +7,7 @@ const LoadmoreShirts = (props) => {
             <div>
             <CardBlockShop
                 grid={props.grid}
-                list={props.shirts}
+                list={props.products}
             />
             </div>
             {
@@ -26,5 +26,6 @@ const LoadmoreShirts = (props) => {
         </div>
     );
 };
+
 
 export default LoadmoreShirts;
