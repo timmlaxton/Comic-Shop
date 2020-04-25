@@ -5,13 +5,16 @@
     ADD_CHARACTER,
     GET_PUBLISHERS,
     ADD_PUBLISHER,
-    GET_PRODUCTS_TO_SHOP,
+    GET_CATERGORYS,
+    ADD_CATERGORY,
+    GET_PRODUCTS_TO_BACK_ISSUES,
+    GET_PRODUCTS_TO_NEW_COMICS,
+    GET_PRODUCTS_TO_TRADES,
     ADD_PRODUCT,
     CLEAR_PRODUCT,
     GET_PRODUCT_DETAIL,
     CLEAR_PRODUCT_DETAIL,
-    GET_SHIRTS,
-    ADD_SHIRT
+    
 
     
 
@@ -34,7 +37,22 @@ export default function(state={},action){
                             characters: action.payload.characters}
         case GET_PUBLISHERS:
             return {...state, publishers: action.payload}
-        case GET_PRODUCTS_TO_SHOP:
+        case GET_CATERGORYS:
+                return {...state, catergorys: action.payload}
+        case ADD_CATERGORY:
+                return {...state, addCatergory: action.payload.success , 
+                                catergorys: action.payload.catergorys}
+        case GET_PRODUCTS_TO_BACK_ISSUES:
+            return {...state,
+                    toShop: action.payload.articles,
+                    toShopSize: action.payload.size
+                }
+        case GET_PRODUCTS_TO_NEW_COMICS:
+            return {...state,
+                    toShop: action.payload.articles,
+                    toShopSize: action.payload.size
+                }
+        case GET_PRODUCTS_TO_TRADES:
             return {...state,
                     toShop: action.payload.articles,
                     toShopSize: action.payload.size
@@ -50,11 +68,8 @@ export default function(state={},action){
             return {...state, prodDetail: action.payload }
         case CLEAR_PRODUCT_DETAIL:
             return {...state, prodDetail: action.payload }
-            case GET_SHIRTS:
-                return {...state, shirts: action.payload}
-            case ADD_SHIRT:
-                return {...state, addshirt: action.payload.success , 
-                                shirts: action.payload.shirts}
+           
+            
         default:
              return state;
 

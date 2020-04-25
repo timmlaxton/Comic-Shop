@@ -11,7 +11,6 @@ import Home from "./components/Home";
 import RegisterLogin from './components/Register_login';
 import Register from './components/Register_login/register';
 import ProductPage from './components/Product';
-import TShirts from "./components/Shop/t_shirts";
 
 
 import UserDashboard from './components/User';
@@ -45,7 +44,6 @@ const Routes = () => {
       <Route path="/back_issues" exact component={Auth(BackIssues,null)}/>
       <Route path="/trades" exact component={Auth(Trades,null)}/>
       <Route path="/new_comics" exact component={Auth(NewComics,null)}/>
-      <Route path="/t_shirts" exact component={Auth(TShirts,null)}/>
 
 
       

@@ -32,6 +32,11 @@ const productSchema = mongoose.Schema({
         ref: 'Publisher',
         required: true
     },
+    catergory: {
+        type: Schema.Types.ObjectId,
+        ref: 'Catergory',
+        required: true
+    },
     sold:{
         type: Number,
         maxlength: 100,

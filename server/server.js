@@ -32,9 +32,10 @@ const {User} = require('./models/user');
 const {Publisher} = require('./models/publisher');
 const {Product} = require('./models/product');
 const {Character} = require('./models/character');
+const {Catergory} = require('./models/catergory');
 const {Payment} =require('./models/payment');
 const {Site} =require ('./models/site');
-const {Shirt} =require ('./models/shirt');
+
 
 
 app.all('/', function(req, res, next) {
@@ -76,6 +77,7 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
     find(findArgs).
     populate('character').
     populate('publisher').
+    populate('catergory').
     sort([[sortBy,order]]).
     skip(skip).
     limit(limit). 
@@ -90,6 +92,94 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
     })
 })
 
+app.post('/api/product/shop/trades',(req,res)=>{
+
+    var order = req.body.order ? req.body.order : "desc";
+    var sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+    var limit = req.body.limit ? parseInt(req.body.limit) : 100; 
+    var skip = parseInt(req.body.skip);
+    var findArgs = {};
+
+    for(var key in req.body.filters){
+        if(req.body.filters[key].length >0 ){
+            if(key === 'price'){
+                findArgs[key] = {
+                    $gte: req.body.filters[key][0],
+                    $lte: req.body.filters[key][1]
+                }
+            }else{
+                findArgs[key] = req.body.filters[key]
+            }
+        }
+    }
+
+    findArgs['publish'] = true;
+
+
+    Product.
+    find(findArgs).
+    populate('character').
+    populate('publisher').
+    populate('catergory').
+    sort([[sortBy,order]]).
+    skip(skip).
+    limit(limit). 
+    exec((err,articles)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).json({
+            size: articles.length,
+            articles
+
+        })
+
+    })
+})
+
+app.post('/api/product/shop/new_comics',(req,res)=>{
+
+    var order = req.body.order ? req.body.order : "desc";
+    var sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+    var limit = req.body.limit ? parseInt(req.body.limit) : 100; 
+    var skip = parseInt(req.body.skip);
+    var findArgs = {};
+
+    for(var key in req.body.filters){
+        if(req.body.filters[key].length >0 ){
+            if(key === 'price'){
+                findArgs[key] = {
+                    $gte: req.body.filters[key][0],
+                    $lte: req.body.filters[key][1]
+                }
+            }else{
+                findArgs[key] = req.body.filters[key]
+            }
+        }
+    }
+
+    findArgs['publish'] = true;
+
+
+    Product.
+    find(findArgs).
+    populate('character').
+    populate('publisher').
+    populate('catergory').
+    sort([[sortBy,order]]).
+    skip(skip).
+    limit(limit). 
+    exec((err,articles)=>{
+        if(err) return res.status(400).send(err);
+        res.status(200).json({
+            size: articles.length,
+            articles
+
+        })
+
+    })
+})
+
+
+
 // By Sell
 app.get('/api/product/articles', (req,res)=> {
 
@@ -100,6 +190,7 @@ app.get('/api/product/articles', (req,res)=> {
     Product.find().
     populate('character').
     populate('publisher').
+    populate('catergory').
     sort([[sortBy,order]]).
     limit(limit).
     exec((err,articles)=>{
@@ -125,6 +216,7 @@ app.get('/api/product/articles_by_id',(req,res)=>{
     find({ '_id':{$in:items}}).
     populate('character').
     populate('publisher').
+    populate('catergory').
     exec((err,docs)=>{
         return res.status(200).send(docs)
     })
@@ -185,27 +277,29 @@ app.get('/api/product/publishers', (req,res)=> {
     })
 });
 
+//Catergory
 
-//TShirt
-app.post('/api/product/shirt',auth,admin,(req,res)=>{
-    const shirt = new Shirt(req.body);
+app.post('/api/product/catergory',auth,admin,(req,res)=>{
+    const catergory = new Catergory(req.body);
 
-    shirt.save((err,doc)=>{
+    catergory.save((err,doc)=>{
         if(err) return res.json({success:false,err});
         res.status(200).json({
             success: true,
-            shirt:doc
+            catergory:doc
         })
     })
 });
 
-
-app.get('/api/product/shirts', (req,res)=> {
-    Shirt.find({},(err, shirts)=>{
+app.get('/api/product/catergorys', (req,res)=> {
+    Catergory.find({},(err, catergorys)=> {
         if(err) return res.status(400).send(err);
-        res.status(200).send(shirts)
+        res.status(200).send(catergorys)
     })
 });
+
+
+
 
 
 

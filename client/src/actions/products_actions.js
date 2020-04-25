@@ -7,9 +7,11 @@ import {
         ADD_CHARACTER,
         GET_PUBLISHERS,
         ADD_PUBLISHER,
-        GET_SHIRTS,
-        ADD_SHIRT,
-        GET_PRODUCTS_TO_SHOP,
+        ADD_CATERGORY,
+        GET_CATERGORYS,
+        GET_PRODUCTS_TO_BACK_ISSUES,
+        GET_PRODUCTS_TO_NEW_COMICS,
+        GET_PRODUCTS_TO_TRADES,
         ADD_PRODUCT,
         CLEAR_PRODUCT,
         GET_PRODUCT_DETAIL,
@@ -67,7 +69,7 @@ export function getProductsByArrival(){
 }
 
 
-export function getProductsToShop(skip, limit, filters  = []){
+export function getBackIssues(skip, limit, filters  = []){
     const data ={limit, skip, filters}
     const request = axios.post(`${PRODUCT_SERVER}/Shop/back_issues`, data)
         .then(response => {
@@ -78,11 +80,48 @@ export function getProductsToShop(skip, limit, filters  = []){
         });
 
     return {
-        type: GET_PRODUCTS_TO_SHOP,
+        type: GET_PRODUCTS_TO_BACK_ISSUES,
         payload: request
     }
 
 }
+
+export function getNewComics(skip, limit, filters  = []){
+    const data ={limit, skip, filters}
+    const request = axios.post(`${PRODUCT_SERVER}/Shop/new_comics`, data)
+        .then(response => {
+                return {
+                size: response.data.size,
+                articles: response.data.articles
+            }
+        });
+
+    return {
+        type: GET_PRODUCTS_TO_NEW_COMICS,
+        payload: request
+    }
+
+}
+
+
+export function getTrades(skip, limit, filters  = []){
+    const data ={limit, skip, filters}
+    const request = axios.post(`${PRODUCT_SERVER}/Shop/trades`, data)
+        .then(response => {
+                return {
+                size: response.data.size,
+                articles: response.data.articles
+            }
+        });
+
+    return {
+        type: GET_PRODUCTS_TO_TRADES,
+        payload: request
+    }
+
+}
+
+
 
 export function addProduct(datatoSubmit){
 
@@ -164,32 +203,33 @@ export function addPublisher(dataToSubmit, existingPublishers){
     }
 }
 
-export function  getShirts(){
-    const request = axios.get(`${PRODUCT_SERVER}/shirts`)
+export function  getCatergorys(){
+    const request = axios.get(`${PRODUCT_SERVER}/catergorys`)
     .then(response => response.data)
 
     return {
-        type: GET_SHIRTS,
+        type: GET_CATERGORYS,
         payload: request
     }
 } 
 
 
 
-export function addShirt(dataToSubmit, existingShirts){
-    const request = axios.post(`${PRODUCT_SERVER}/shirt`,dataToSubmit)
+export function addCatergory(dataToSubmit, existingCatergorys){
+    const request = axios.post(`${PRODUCT_SERVER}/catergory`,dataToSubmit)
     .then(response=>{
-        var shirts = [
-            ...existingShirts,
-            response.data.shirt
+        var catergorys = [
+            ...existingCatergorys,
+            response.data.publisher
         ];
         return {
             success: response.data.success,
-            shirts
+            catergorys
         }
     });
     return {
-        type: ADD_SHIRT,
+        type: ADD_CATERGORY,
         payload: request
     }
 }
+

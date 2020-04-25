@@ -4,7 +4,7 @@ import PageTop from '../../utils/page_top';
 import {price} from '../../utils/Form/fixed_catergories';
 
 import {connect} from 'react-redux';
-import { getProductsToShop, getCharacters, getPublishers} from '../../../actions/products_actions';
+import { getBackIssues, getCharacters, getPublishers, getCatergorys} from '../../../actions/products_actions';
 
 import LoadmoreCards from './loadmoreCards';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -23,6 +23,7 @@ class BackIssues extends Component {
       filters: {
         character:[],
         publisher:[],
+        catergory: [],
         price:[]
       }
   }
@@ -30,9 +31,10 @@ class BackIssues extends Component {
     componentDidMount(){
         this.props.dispatch(getCharacters());
         this.props.dispatch(getPublishers());
+        this.props.dispatch(getCatergorys());
 
         
-        this.props.dispatch(getProductsToShop(
+        this.props.dispatch(getBackIssues(
             this.state.skip,
             this.state.limit,
             this.state.filters
@@ -68,7 +70,7 @@ class BackIssues extends Component {
     }
 
     showFilteredResults = (filters) =>{
-        this.props.dispatch(getProductsToShop(
+        this.props.dispatch(getBackIssues(
             0,
             this.state.limit,
             filters
@@ -82,7 +84,7 @@ class BackIssues extends Component {
     loadMoreCards = () => {
         var skip = this.state.skip + this.state.limit;
 
-        this.props.dispatch(getProductsToShop(
+        this.props.dispatch(getBackIssues(
             skip,
             this.state.limit,
             this.state.filters,
@@ -125,6 +127,12 @@ class BackIssues extends Component {
                             title="Publisher"
                             list={products.publishers}
                             handleFilters={(filters)=> this.handleFilters(filters, 'publisher')}
+                           /> 
+                            <CollapseCheckbox
+                            initState={true} 
+                            title="Catergory"
+                            list={products.catergorys}
+                            handleFilters={(filters)=> this.handleFilters(filters, 'catergory')}
                            /> 
 
 

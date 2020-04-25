@@ -4,7 +4,7 @@ import PageTop from '../../utils/page_top';
 import {price} from '../../utils/Form/fixed_catergories';
 
 import {connect} from 'react-redux';
-import { getProductsToShop, getCharacters, getPublishers} from '../../../actions/products_actions';
+import { getTrades, getCharacters, getPublishers} from '../../../actions/products_actions';
 
 import LoadmoreCards from './loadmoreCards';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -36,7 +36,7 @@ class Trades extends Component {
           this.props.dispatch(getPublishers());
   
           
-          this.props.dispatch(getProductsToShop(
+          this.props.dispatch(getTrades(
               this.state.skip,
               this.state.limit,
               this.state.filters
@@ -72,7 +72,7 @@ class Trades extends Component {
       }
   
       showFilteredResults = (filters) =>{
-          this.props.dispatch(getProductsToShop(
+          this.props.dispatch(getTrades(
               0,
               this.state.limit,
               filters
@@ -86,7 +86,7 @@ class Trades extends Component {
       loadMoreCards = () => {
           var skip = this.state.skip + this.state.limit;
   
-          this.props.dispatch(getProductsToShop(
+          this.props.dispatch(getTrades(
               skip,
               this.state.limit,
               this.state.filters,

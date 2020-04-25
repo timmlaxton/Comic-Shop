@@ -17,11 +17,13 @@ export const GET_CHARACTERS = 'get_characters';
 export const ADD_CHARACTER = 'add_character';
 export const GET_PUBLISHERS = 'get_publishers';
 export const ADD_PUBLISHER = 'add_publisher';
-export const GET_PRODUCTS_TO_SHOP = 'get_products_to_shop';
+export const ADD_CATERGORY = 'add_catergory';
+export const GET_CATERGORYS = 'get_catergorys';
+export const GET_PRODUCTS_TO_BACK_ISSUES = 'get_products_to_back_issues';
+export const GET_PRODUCTS_TO_NEW_COMICS = 'get_products_to_new_comics';
+export const GET_PRODUCTS_TO_TRADES = 'get_products_to_trades';
 export const ADD_PRODUCT = "add_product"
 export const CLEAR_PRODUCT = 'clear_product'
-export const GET_SHIRTS = 'get_shirts'
-export const ADD_SHIRT = 'add_shirt'
 export const GET_PRODUCT_DETAIL = 'get_product_detail'
 export const CLEAR_PRODUCT_DETAIL = 'clear_product_detail'
 
