@@ -32,8 +32,7 @@ class Card extends Component {
                 <div className="tags">
                     <div className="name">{props.character.name}</div>
                     <div className="publisher">{props.publisher.name}</div>
-                    {/* <div className="catergory">{props.catergory.name}</div> */}
-                    <div className="issue">{props.issue}</div>
+                    <div className="issue">Issue {props.issue}</div>
                     <div className="price">£{props.price}</div>
                     
 

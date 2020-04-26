@@ -17,23 +17,12 @@ state = {
             
         },
         {
-            name: "Back Issues",
-            linkTo:'/back_issues',
+            name: "Comics",
+            linkTo:'/comics',
             public: true
             
         },
-        {
-            name: "Trades",
-            linkTo:'/trades',
-            public: true
-            
-        },
-        {
-            name: "New Comics",
-            linkTo:'/new_comics',
-            public: true
-            
-        },
+        
         {
             name: "Shirts",
             linkTo:'/t_shirts',

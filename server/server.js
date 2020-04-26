@@ -49,7 +49,7 @@ app.all('/', function(req, res, next) {
 
 //Products
 
-app.post('/api/product/shop/back_issues',(req,res)=>{
+app.post('/api/product/shop/comics',(req,res)=>{
 
     var order = req.body.order ? req.body.order : "desc";
     var sortBy = req.body.sortBy ? req.body.sortBy : "_id";
@@ -92,91 +92,6 @@ app.post('/api/product/shop/back_issues',(req,res)=>{
     })
 })
 
-app.post('/api/product/shop/trades',(req,res)=>{
-
-    var order = req.body.order ? req.body.order : "desc";
-    var sortBy = req.body.sortBy ? req.body.sortBy : "_id";
-    var limit = req.body.limit ? parseInt(req.body.limit) : 100; 
-    var skip = parseInt(req.body.skip);
-    var findArgs = {};
-
-    for(var key in req.body.filters){
-        if(req.body.filters[key].length >0 ){
-            if(key === 'price'){
-                findArgs[key] = {
-                    $gte: req.body.filters[key][0],
-                    $lte: req.body.filters[key][1]
-                }
-            }else{
-                findArgs[key] = req.body.filters[key]
-            }
-        }
-    }
-
-    findArgs['publish'] = true;
-
-
-    Product.
-    find(findArgs).
-    populate('character').
-    populate('publisher').
-    populate('catergory').
-    sort([[sortBy,order]]).
-    skip(skip).
-    limit(limit). 
-    exec((err,articles)=>{
-        if(err) return res.status(400).send(err);
-        res.status(200).json({
-            size: articles.length,
-            articles
-
-        })
-
-    })
-})
-
-app.post('/api/product/shop/new_comics',(req,res)=>{
-
-    var order = req.body.order ? req.body.order : "desc";
-    var sortBy = req.body.sortBy ? req.body.sortBy : "_id";
-    var limit = req.body.limit ? parseInt(req.body.limit) : 100; 
-    var skip = parseInt(req.body.skip);
-    var findArgs = {};
-
-    for(var key in req.body.filters){
-        if(req.body.filters[key].length >0 ){
-            if(key === 'price'){
-                findArgs[key] = {
-                    $gte: req.body.filters[key][0],
-                    $lte: req.body.filters[key][1]
-                }
-            }else{
-                findArgs[key] = req.body.filters[key]
-            }
-        }
-    }
-
-    findArgs['publish'] = true;
-
-
-    Product.
-    find(findArgs).
-    populate('character').
-    populate('publisher').
-    populate('catergory').
-    sort([[sortBy,order]]).
-    skip(skip).
-    limit(limit). 
-    exec((err,articles)=>{
-        if(err) return res.status(400).send(err);
-        res.status(200).json({
-            size: articles.length,
-            articles
-
-        })
-
-    })
-})
 
 
 

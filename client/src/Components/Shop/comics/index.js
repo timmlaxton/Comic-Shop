@@ -4,7 +4,7 @@ import PageTop from '../../utils/page_top';
 import {price} from '../../utils/Form/fixed_catergories';
 
 import {connect} from 'react-redux';
-import { getNewComics, getCharacters, getPublishers} from '../../../actions/products_actions';
+import { getComics, getCharacters, getPublishers, getCatergorys} from '../../../actions/products_actions';
 
 import LoadmoreCards from './loadmoreCards';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -14,26 +14,27 @@ import faTh from '@fortawesome/fontawesome-free-solid/faTh';
 import CollapseCheckbox from '../../utils/collapseCheckbox';
 import CollapseRadio from '../../utils/collapseRadio'
 
-class NewComics extends Component {
+class BackIssues extends Component {
 
-    state = {
-        grid:"",
-        limit:20,
-        skip:0,
-        filters: {
-          character:[],
-          publisher:[],
-          price:[]
-        }
-    }
+  state = {
+      grid:"",
+      limit:20,
+      skip:0,
+      filters: {
+        character:[],
+        publisher:[],
+        catergory: [],
+        price:[]
+      }
+  }
 
     componentDidMount(){
         this.props.dispatch(getCharacters());
         this.props.dispatch(getPublishers());
+        this.props.dispatch(getCatergorys());
 
         
-        this.props.dispatch(getNewComics(
-            
+        this.props.dispatch(getComics(
             this.state.skip,
             this.state.limit,
             this.state.filters
@@ -69,7 +70,7 @@ class NewComics extends Component {
     }
 
     showFilteredResults = (filters) =>{
-        this.props.dispatch(getNewComics(
+        this.props.dispatch(getComics(
             0,
             this.state.limit,
             filters
@@ -83,7 +84,7 @@ class NewComics extends Component {
     loadMoreCards = () => {
         var skip = this.state.skip + this.state.limit;
 
-        this.props.dispatch(getNewComics(
+        this.props.dispatch(getComics(
             skip,
             this.state.limit,
             this.state.filters,
@@ -102,14 +103,13 @@ class NewComics extends Component {
     }
 
 
-
     render() {
         
         const products = this.props.products;
         return (
             <div>
                 <PageTop
-                title=" Back Issues"
+                title="Comics"
                 
                 />
                 <div className="container">
@@ -127,6 +127,12 @@ class NewComics extends Component {
                             title="Publisher"
                             list={products.publishers}
                             handleFilters={(filters)=> this.handleFilters(filters, 'publisher')}
+                           /> 
+                            <CollapseCheckbox
+                            initState={true} 
+                            title="Catergory"
+                            list={products.catergorys}
+                            handleFilters={(filters)=> this.handleFilters(filters, 'catergory')}
                            /> 
 
 
@@ -184,4 +190,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(NewComics);
+export default connect(mapStateToProps)(BackIssues);

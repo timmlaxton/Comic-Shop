@@ -4,9 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 import Auth from './hoc/auth';
 import Layout from './hoc/layout'
 
-import BackIssues from './components/Shop/back_issues'
-import NewComics from './components/Shop/new_comics'
-import Trades from './components/Shop/trades'
+import Comics from './components/Shop/comics'
 import Home from "./components/Home";
 import RegisterLogin from './components/Register_login';
 import Register from './components/Register_login/register';
@@ -41,9 +39,8 @@ const Routes = () => {
       <Route path="/register_login" exact component={Auth(RegisterLogin,false)}/>
       <Route path="/register" exact component={Auth(Register,false)}/>
       <Route path="/" exact component={Auth(Home,null)}/>
-      <Route path="/back_issues" exact component={Auth(BackIssues,null)}/>
-      <Route path="/trades" exact component={Auth(Trades,null)}/>
-      <Route path="/new_comics" exact component={Auth(NewComics,null)}/>
+      <Route path="/comics" exact component={Auth(Comics,null)}/>
+      
 
 
       

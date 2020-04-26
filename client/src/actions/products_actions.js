@@ -9,9 +9,7 @@ import {
         ADD_PUBLISHER,
         ADD_CATERGORY,
         GET_CATERGORYS,
-        GET_PRODUCTS_TO_BACK_ISSUES,
-        GET_PRODUCTS_TO_NEW_COMICS,
-        GET_PRODUCTS_TO_TRADES,
+        GET_PRODUCTS_TO_COMICS,
         ADD_PRODUCT,
         CLEAR_PRODUCT,
         GET_PRODUCT_DETAIL,
@@ -69,9 +67,9 @@ export function getProductsByArrival(){
 }
 
 
-export function getBackIssues(skip, limit, filters  = []){
+export function getComics(skip, limit, filters  = []){
     const data ={limit, skip, filters}
-    const request = axios.post(`${PRODUCT_SERVER}/Shop/back_issues`, data)
+    const request = axios.post(`${PRODUCT_SERVER}/Shop/comics`, data)
         .then(response => {
                 return {
                 size: response.data.size,
@@ -80,46 +78,13 @@ export function getBackIssues(skip, limit, filters  = []){
         });
 
     return {
-        type: GET_PRODUCTS_TO_BACK_ISSUES,
-        payload: request
-    }
-
-}
-
-export function getNewComics(skip, limit, filters  = []){
-    const data ={limit, skip, filters}
-    const request = axios.post(`${PRODUCT_SERVER}/Shop/new_comics`, data)
-        .then(response => {
-                return {
-                size: response.data.size,
-                articles: response.data.articles
-            }
-        });
-
-    return {
-        type: GET_PRODUCTS_TO_NEW_COMICS,
+        type: GET_PRODUCTS_TO_COMICS,
         payload: request
     }
 
 }
 
 
-export function getTrades(skip, limit, filters  = []){
-    const data ={limit, skip, filters}
-    const request = axios.post(`${PRODUCT_SERVER}/Shop/trades`, data)
-        .then(response => {
-                return {
-                size: response.data.size,
-                articles: response.data.articles
-            }
-        });
-
-    return {
-        type: GET_PRODUCTS_TO_TRADES,
-        payload: request
-    }
-
-}
 
 
 

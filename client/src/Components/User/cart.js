@@ -53,7 +53,7 @@ class UserCart extends Component {
         var total = 0;
 
         cartDetail.forEach(item=>{
-            total += parseFloat(item.price) * item.quantity
+            total += parseFloat(item.price).toFixed(2) * item.quantity
             
         });
 

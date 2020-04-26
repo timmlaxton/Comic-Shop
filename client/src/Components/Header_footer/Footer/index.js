@@ -72,7 +72,7 @@ const Footer = ({data}) => {
             <h2> Join our mailing list for the latest comics</h2>
             <div>
                 <div>
-                Monkey eat bananan
+                WHAT WOULD YOU LIKE WRITTEN HERE
                 </div>
 
             </div>

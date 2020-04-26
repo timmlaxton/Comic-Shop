@@ -27,7 +27,7 @@ class Home extends Component {
                 <HomePromotion/>
                 <CardBlock
                     list={this.props.products.byArrival}
-                    title="New Staff Picks"
+                    title="Back Issues"
                 
                 />
             </div>
