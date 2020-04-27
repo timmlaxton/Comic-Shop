@@ -9,6 +9,8 @@ import {
         ADD_PUBLISHER,
         ADD_CATERGORY,
         GET_CATERGORYS,
+        GET_SHIRTS,
+        ADD_SHIRT,
         GET_PRODUCTS_TO_COMICS,
         ADD_PRODUCT,
         CLEAR_PRODUCT,
@@ -198,3 +200,30 @@ export function addCatergory(dataToSubmit, existingCatergorys){
     }
 }
 
+export function  getShirts(){
+    const request = axios.get(`${PRODUCT_SERVER}/shirts`)
+    .then(response => response.data)
+
+    return {
+        type: GET_SHIRTS,
+        payload: request
+    }
+} 
+
+export function addShirt(dataToSubmit, existingShirts){
+    const request = axios.post(`${PRODUCT_SERVER}/shirt`,dataToSubmit)
+    .then(response=>{
+        var shirts = [
+            ...existingShirts,
+            response.data.shirt
+        ];
+        return {
+            success: response.data.success,
+            shirts
+        }
+    });
+    return {
+        type: ADD_SHIRT,
+        payload: request
+    }
+}

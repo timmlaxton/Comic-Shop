@@ -25,7 +25,7 @@ state = {
         
         {
             name: "Shirts",
-            linkTo:'/t_shirts',
+            linkTo:'/shirts',
             public: true
             
         },

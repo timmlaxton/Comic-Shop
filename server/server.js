@@ -33,8 +33,10 @@ const {Publisher} = require('./models/publisher');
 const {Product} = require('./models/product');
 const {Character} = require('./models/character');
 const {Catergory} = require('./models/catergory');
+const {Shirt} = require('./models/shirt');
 const {Payment} =require('./models/payment');
 const {Site} =require ('./models/site');
+
 
 
 
@@ -214,7 +216,26 @@ app.get('/api/product/catergorys', (req,res)=> {
 });
 
 
+//Shirt
 
+app.post('/api/product/shirt',auth,admin,(req,res)=>{
+    const shirt = new Shirt(req.body);
+
+    shirt.save((err,doc)=>{
+        if(err) return res.json({success:false,err});
+        res.status(200).json({
+            success: true,
+            shirt:doc
+        })
+    })
+});
+
+app.get('/api/product/shirts', (req,res)=> {
+    Shirt.find({},(err, shirts)=> {
+        if(err) return res.status(400).send(err);
+        res.status(200).send(shirts)
+    })
+});
 
 
 
@@ -266,7 +287,7 @@ app.post('/api/users/login',(req,res)=> {
     })
 })
 
-app.get('/api/users/logout',auth,(req,res)=>{
+app.get('/api/user/logout',auth,(req,res)=>{
     User.findOneAndUpdate(
         { _id:req.user._id },
         { token: '' },
@@ -278,6 +299,11 @@ app.get('/api/users/logout',auth,(req,res)=>{
         }
     )
 })
+
+
+
+
+
 
 app.post('/api/users/uploadimage',auth,admin,formidable(),(req,res)=>{
     cloudinary.uploader.upload(req.files.file.path,(result)=>{
@@ -293,7 +319,7 @@ app.post('/api/users/uploadimage',auth,admin,formidable(),(req,res)=>{
 })
 
 app.get('/api/users/removeimage',auth,admin,(req,res)=>{
-    let image_id = req.query.public_id;
+    var image_id = req.query.public_id;
 
     cloudinary.uploader.destroy(image_id,(error,result)=>{
         if(error) return res.json({succes:false,error});

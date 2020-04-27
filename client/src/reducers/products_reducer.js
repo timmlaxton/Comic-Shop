@@ -7,6 +7,8 @@
     ADD_PUBLISHER,
     GET_CATERGORYS,
     ADD_CATERGORY,
+    GET_SHIRTS,
+    ADD_SHIRT,
     GET_PRODUCTS_TO_COMICS,
     ADD_PRODUCT,
     CLEAR_PRODUCT,
@@ -39,7 +41,12 @@ export default function(state={},action){
                 return {...state, catergorys: action.payload}
         case ADD_CATERGORY:
                 return {...state, addCatergory: action.payload.success , 
-                                catergorys: action.payload.catergorys}
+                        catergorys: action.payload.catergorys}
+        case GET_SHIRTS:
+                return {...state, catergorys: action.payload}
+        case ADD_SHIRT:
+                return {...state, addCatergory: action.payload.success , 
+                        catergorys: action.payload.catergorys}
         case GET_PRODUCTS_TO_COMICS:
             return {...state,
                     toShop: action.payload.articles,

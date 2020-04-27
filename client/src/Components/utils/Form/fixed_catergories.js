@@ -42,6 +42,26 @@ const price = [
     },
 ]
 
+const size = [
+    {
+        "_id": 1,
+        "name": "M"
+    },
+    {
+        "_id": 2,
+        "name": "L"
+    },
+    {
+        "_id": 3,
+        "name": "XL"
+    },
+    {
+        "_id": 4,
+        "name": "XXL"
+    }
+]
+
 export {
-    price
+    price,
+    size
 }
