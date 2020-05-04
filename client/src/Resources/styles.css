@@ -481,7 +481,7 @@ footer .business_nfo .nfo {
     border-bottom: 1px solid #f0f0f0;
 }
 
-.card_item_wrapper .tags .name,
+.card_item_wrapper .tags .character,
 .card_item_wrapper .tags .catergory,
 .card_item_wrapper .tags .issue,
 .card_item_wrapper .tags .publisher,
@@ -831,16 +831,25 @@ footer .business_nfo .nfo {
 }
 .user_product_block .item.btn {
     width: 0px;
+    
+    
 }
 
 
 .user_product_block .cart_remove_btn {
     cursor: pointer;
-    background: #F44336;
+    background: rgb(244, 54, 54);
     display: inline-block;
     padding: 5px 10px;
     color: #ffffff;
     margin-top: 50px;
+}
+
+.user_product_block .quantity {
+    width: 30%;
+    margin-top: -20px;
+    padding: 1px;
+    box-sizing: border-box;
 }
 
 /*=============================

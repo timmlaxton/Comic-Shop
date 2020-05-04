@@ -30,7 +30,9 @@ const UserProductBlock = ({products, removeItem, updateQuantity}) => {
                 <div className="item"> 
                 <h4>Quantity</h4>
                 <div>
+                <div className="quantity">
                     <input type="number" value={product.quantity} onChange={e => updateQuantity(e.target.value, product)} />
+                </div>
                 </div>
                 </div>
                 <div className="item"> 

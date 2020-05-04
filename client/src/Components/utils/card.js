@@ -30,7 +30,8 @@ class Card extends Component {
                 > </div>
                 <div className="action_container">
                 <div className="tags">
-                    { props.character ? <div className="character">{props.character.name}</div> : null}
+                    { props.character ? 
+                    <div className="character">{props.character.name}</div> : null}
                     <div className="publisher">{props.publisher.name}</div>
                     <div className="issue">Issue{props.issue}</div>
                     <div className="price">£{props.price}</div>
