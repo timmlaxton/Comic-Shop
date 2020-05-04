@@ -6,6 +6,16 @@ import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {loginUser} from '../../actions/user_actions';
 
+/*
+    init login is dispatched
+    it sets a loginPending flag to true
+    when login finishes, depending on the outcome
+    if success
+        then set user data, and loginPending to false
+    if error
+        then set errorFetching flag to true and loginPending to false
+*/
+
 class Login extends Component {
 
     state = {
@@ -55,6 +65,13 @@ class Login extends Component {
             })
         }
 
+        componentDidUpdate(prevProps, prevState) {
+            console.log('login component did update', this, prevProps)
+            if (this.props.loginSuccess) {               
+                this.props.history.push('/user/dashboard')
+            }
+        }
+
         submitForm = (event) => {
             event.preventDefault();
 
@@ -62,18 +79,7 @@ class Login extends Component {
             var formIsValid = isFormValid(this.state.formdata, 'login');
 
             if(formIsValid){
-                this.props.dispatch(loginUser(dataToSubmit)).then(response => {
-                    if(response.payload.loginSuccess){
-                        console.log(response.payload);
-                        this.props.history.push('/user/dashboard')
-
-                    }else{
-                        this.setState({
-                            formError: true
-                        })
-                    }
-                });
-
+                this.props.dispatch(loginUser(dataToSubmit))  
             } else {
                 this.setState({
                     formError: true
@@ -116,4 +122,11 @@ class Login extends Component {
     }
 }
 
-export default connect()(withRouter(Login));
+const mapStateToProps = state => {
+    console.log('in map state ot props login', state)
+    return {
+        loginSuccess: state.user.loginSuccess
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Login));

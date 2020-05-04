@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const shirtSchema = mongoose.Schema({
     name:{
-        rquired:true,
+        required:true,
         type:String,
         maxlength:100
     },

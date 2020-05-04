@@ -68,11 +68,11 @@ state = {
 
 
     cartLink = (item,i) => {
-        const user = this.props.user.userData;
-        
+        const cartItems = this.props.cart.cartItems
+        console.log('cart link', cartItems, this)
         return (
             <div className="cart_link" key={i}>
-            <span>{user.cart ? user.cart.length:0}</span>
+            <span>{cartItems ? cartItems.length:0}</span>
             <Link to={item.linkTo}>
                 {item.name}
             </Link>
@@ -160,7 +160,8 @@ state = {
 
 function mapStateToProps(state){
     return {
-        user: state.user
+        user: state.user,
+        cart: state.cart
     }
 }
 

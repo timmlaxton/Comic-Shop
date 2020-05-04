@@ -8,22 +8,28 @@ import {
     REMOVE_CART_ITEM_USER,
     ON_SUCCESS_BUY_USER,
     UPDATE_DATA_USER,
-    CLEAR_UPDATE_USER
+    CLEAR_UPDATE_USER,
+    SUB_QUANTITY,
+    ADD_QUANTITY
 
 } from '../actions/types';
+
+const initialState = {
+    loginSuccess: false
+}
  
 
-export default function(state={},action){
+export default function(state=initialState,action){
     switch(action.type){
         case REGISTER_USER:
             return {...state, register: action.payload }
         case LOGIN_USER:
-            return { ...state, loginSucces: action.payload }
+            return { ...state, loginSuccess: action.payload }
         case AUTH_USER:
             return {...state, userData: action.payload }
         case LOGOUT_USER:
             return {...state }
-        case ADD_TO_CART_USER:
+        /*case ADD_TO_CART_USER:
             return {...state, userData:{
                 ...state.userData,
                 cart: action.payload
@@ -39,13 +45,18 @@ export default function(state={},action){
                     cart: action.payload.cart
                 }
             }
+        case SUB_QUANTITY:
+            return {...state, cartDetail: action.payload}
+        
+        case ADD_QUANTITY:
+            return{...state, cartDetail: action.payload}
         case ON_SUCCESS_BUY_USER:
             return{...state, successBuy: action.payload.success,
             userData:{
                 ...state.userData, cart: action.payload.cart
             },
             cartDetail: action.payload.cartDetail
-            }
+            }*/
         case UPDATE_DATA_USER:
             return{...state,updateUser: action.payload}
         case CLEAR_UPDATE_USER:

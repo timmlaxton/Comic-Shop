@@ -4,15 +4,15 @@ import HomePromotion from './home_promotions';
 import CardBlock from '../utils/card_block'
 
 import {connect} from 'react-redux';
-import { getProductsBySell, getProductsByArrival} from '../../actions/products_actions';
+import { getNewArrivals, getBackIssues} from '../../actions/products_actions';
 
 
 
 class Home extends Component {
 
     componentDidMount(){
-        this.props.dispatch(getProductsBySell());
-        this.props.dispatch(getProductsByArrival());
+        this.props.dispatch(getNewArrivals());
+        this.props.dispatch(getBackIssues());
     }
 
     render() {
@@ -20,13 +20,13 @@ class Home extends Component {
             <div>
                 <HomeSlider/>
                 <CardBlock
-                    list={this.props.products.bySell}
+                    list={this.props.products.byArrival}
                     title="New Arrivals"
                 
                 />
                 <HomePromotion/>
                 <CardBlock
-                    list={this.props.products.byArrival}
+                    list={this.props.products.byBackIssue}
                     title="Back Issues"
                 
                 />

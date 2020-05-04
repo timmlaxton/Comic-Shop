@@ -1,6 +1,6 @@
  import {
-    GET_PRODUCTS_BY_SELL,
-    GET_PRODUCTS_BY_ARRIVAL,
+    GET_NEW_ARRIVALS,
+    GET_BACK_ISSUES,
     GET_CHARACTERS,
     ADD_CHARACTER,
     GET_PUBLISHERS,
@@ -13,8 +13,7 @@
     ADD_PRODUCT,
     CLEAR_PRODUCT,
     GET_PRODUCT_DETAIL,
-    CLEAR_PRODUCT_DETAIL,
-    
+    CLEAR_PRODUCT_DETAIL,  
 
     
 
@@ -26,10 +25,10 @@
 
 export default function(state={},action){
     switch(action.type){
-        case GET_PRODUCTS_BY_SELL:
-            return {...state, bySell: action.payload}
-        case GET_PRODUCTS_BY_ARRIVAL:
+        case GET_NEW_ARRIVALS:
             return {...state, byArrival: action.payload}
+        case GET_BACK_ISSUES:
+            return {...state, byBackIssue: action.payload}
         case GET_CHARACTERS:
             return {...state, characters: action.payload}
         case ADD_CHARACTER:

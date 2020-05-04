@@ -7,9 +7,9 @@ import {connect} from 'react-redux';
 import { getComics, getCharacters, getPublishers, getCatergorys} from '../../../actions/products_actions';
 
 import LoadmoreCards from './loadmoreCards';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faBars from '@fortawesome/fontawesome-free-solid/faBars';
-import faTh from '@fortawesome/fontawesome-free-solid/faTh';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faBars} from '@fortawesome/fontawesome-free-solid';
+import {faTh} from '@fortawesome/fontawesome-free-solid';
 
 import CollapseCheckbox from '../../utils/collapseCheckbox';
 import CollapseRadio from '../../utils/collapseRadio'

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MyButton from './button';
 
 import {connect} from 'react-redux';
-import {addToCart}from '../../actions/user_actions';
+import {addToCart}from '../../actions/cart_actions';
 
 class Card extends Component {
 
@@ -30,12 +30,10 @@ class Card extends Component {
                 > </div>
                 <div className="action_container">
                 <div className="tags">
-                    <div className="name">{props.character.name}</div>
+                    { props.character ? <div className="character">{props.character.name}</div> : null}
                     <div className="publisher">{props.publisher.name}</div>
-                    <div className="issue">Issue {props.issue}</div>
+                    <div className="issue">Issue{props.issue}</div>
                     <div className="price">£{props.price}</div>
-                    
-
                     </div>
                     
                 { props.grid ?

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {
     
-        GET_PRODUCTS_BY_SELL,
-        GET_PRODUCTS_BY_ARRIVAL,
+        GET_NEW_ARRIVALS,
+        GET_BACK_ISSUES,
         GET_CHARACTERS,
         ADD_CHARACTER,
         GET_PUBLISHERS,
@@ -46,24 +46,24 @@ export function clearProductDetail(){
     }
 }
 
-export function getProductsBySell(){
-   
-    const request = axios.get(`${PRODUCT_SERVER}/articles?sortBy=sold&order=desc&limit=4`)
+export function getNewArrivals(){
+
+    const request = axios.get(`${PRODUCT_SERVER}/articles?sortBy=createdAt&order=asc&limit=4`)
             .then(response => response.data)
 
             return {
-                type: GET_PRODUCTS_BY_SELL,
+                type: GET_NEW_ARRIVALS,
                 payload: request
             }
 }
 
-export function getProductsByArrival(){
+export function getBackIssues(){
 
-    const request = axios.get(`${PRODUCT_SERVER}/articles?sortBy=created&order=desc&limit=4`)
+    const request = axios.get(`${PRODUCT_SERVER}/articles?sortBy=sold&order=desc&limit=4`)
             .then(response => response.data)
 
             return {
-                type: GET_PRODUCTS_BY_ARRIVAL,
+                type: GET_BACK_ISSUES,
                 payload: request
             }
 }

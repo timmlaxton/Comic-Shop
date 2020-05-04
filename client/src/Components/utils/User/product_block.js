@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserProductBlock = ({products, removeItem}) => {
+const UserProductBlock = ({products, removeItem, updateQuantity}) => {
 
 
     const renderCartimage = (images) => {
@@ -24,13 +24,13 @@ const UserProductBlock = ({products, removeItem}) => {
                 <div className="item"> 
                 <h4>Item</h4>
                 <div>
-                    {product.character.name} {product.name}
+                    {product.name} 
                 </div>
                 </div>
                 <div className="item"> 
                 <h4>Quantity</h4>
                 <div>
-                    {product.quantity} 
+                    <input type="number" value={product.quantity} onChange={e => updateQuantity(e.target.value, product)} />
                 </div>
                 </div>
                 <div className="item"> 

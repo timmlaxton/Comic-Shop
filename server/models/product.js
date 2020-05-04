@@ -20,7 +20,7 @@ const productSchema = mongoose.Schema({
     description: {
         required: true,
         type: String,
-        maxlength: 500
+        maxlength: 1000000
     },
     price: {
         required: true,
@@ -36,6 +36,11 @@ const productSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Catergory',
         required: true
+    },
+    amount:{
+        type: Number,
+        maxlength: 100,
+        default: 0
     },
     sold:{
         type: Number,
@@ -54,7 +59,7 @@ const productSchema = mongoose.Schema({
         type: Array,
         default: []
     }
-}, {timestamps:true, collection: 'Product'});
+}, {timestamps:true,  collection: 'Product'});
 
 const Product = mongoose.model('Product', productSchema);
 module.exports = {Product}

@@ -51,9 +51,26 @@ app.all('/', function(req, res, next) {
 
 //Products
 
+app.post('/api/product/update_quantity', auth, async (req, res) => {
+    const data = req.body
+    console.log('data?', data)
+    data.user = req.user
+    const cart = req.body.cart
+    console.log('cart detail?', cart)
+    const response = await User.findOneAndUpdate({
+        _id: req.user._id
+    }, {
+        cart
+    })
+
+    console.log('result', response)
+    
+    res.send(JSON.stringify(response))
+})
+
 app.post('/api/product/shop/comics',(req,res)=>{
 
-    var order = req.body.order ? req.body.order : "desc";
+    var order = req.body.order ? req.body.order : "asc";
     var sortBy = req.body.sortBy ? req.body.sortBy : "_id";
     var limit = req.body.limit ? parseInt(req.body.limit) : 100; 
     var skip = parseInt(req.body.skip);
@@ -287,7 +304,7 @@ app.post('/api/users/login',(req,res)=> {
     })
 })
 
-app.get('/api/user/logout',auth,(req,res)=>{
+app.get('/api/users/logout',auth,(req,res)=>{
     User.findOneAndUpdate(
         { _id:req.user._id },
         { token: '' },
@@ -298,8 +315,7 @@ app.get('/api/user/logout',auth,(req,res)=>{
             })
         }
     )
-})
-
+});
 
 
 

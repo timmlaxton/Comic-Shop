@@ -96,6 +96,25 @@ class AddProduct extends Component {
                 validationMessage:'',
                 showlabel: true
             },
+            amount: {
+                element: 'input',
+                value: '',
+                config:{
+                    label: 'Amount',
+                    name: 'amount_input',
+                    type: 'number',
+                    placeholder: 'Enter number of stock'
+                },
+                validation:{
+                    required: true
+                },
+                valid: false,
+                touched: false,
+                validationMessage:'',
+                showlabel: true
+
+            
+            },
             issue: {
                 element: 'input',
                 value: '',
@@ -143,6 +162,7 @@ class AddProduct extends Component {
                         {key:true,value:'Yes'},
                         {key:false,value:'No'},
                     ]
+                
                 },
                 validation:{
                     required: true
@@ -337,6 +357,12 @@ class AddProduct extends Component {
                      <FormField
                        id={'character'}
                        formdata={this.state.formdata.character}
+                       change={(element)=> this.updateForm(element)}
+                     />
+
+                    <FormField
+                       id={'amount'}
+                       formdata={this.state.formdata.amount}
                        change={(element)=> this.updateForm(element)}
                      />
 

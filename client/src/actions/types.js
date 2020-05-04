@@ -8,11 +8,13 @@ export const REMOVE_CART_ITEM_USER = 'remove_cart_item_user';
 export const ON_SUCCESS_BUY_USER = 'on_success_buy_user';
 export const UPDATE_DATA_USER = 'update_data_user';
 export const CLEAR_UPDATE_USER = "clear_update_user";
+export const SUB_QUANTITY = "sub_quantity_user";
+export const ADD_QUANTITY = "add_quantity";
+export const UPDATE_CART_DETAIL = 'update_cart_detail'
+export const SET_CART_ITEMS = 'set_cart_items'
 
-
-
-export const GET_PRODUCTS_BY_SELL = 'get_products_by_sell';
-export const GET_PRODUCTS_BY_ARRIVAL = 'get_products_by_arrival';
+export const GET_NEW_ARRIVALS = 'get_new_arrivals';
+export const GET_BACK_ISSUES = 'get_back_issues';
 export const GET_CHARACTERS = 'get_characters';
 export const ADD_CHARACTER = 'add_character';
 export const GET_PUBLISHERS = 'get_publishers';

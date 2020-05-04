@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import faAngleDown from '@fortawesome/fontawesome-free-solid/faAngleDown';
 import faAngleUp from '@fortawesome/fontawesome-free-solid/faAngleUp';
 

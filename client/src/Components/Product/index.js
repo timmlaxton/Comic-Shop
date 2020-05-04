@@ -5,7 +5,7 @@ import ProdNfo from './prodNfo';
 import ProdImg from './prodImg';
 
 import {connect} from 'react-redux';
-import {addToCart} from '../../actions/user_actions';
+import {addToCart} from '../../actions/cart_actions';
 import {getProductDetail, clearProductDetail} from '../../actions/products_actions';
 
 
