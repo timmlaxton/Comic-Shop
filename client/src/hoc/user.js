@@ -15,6 +15,10 @@ const links = [
     {
         name: 'My Cart',
         linkTo: "/user/cart"
+    },
+    {   name: 'Standing Order',
+        linkTo: "/user/standing_order"
+
     }
 ]
 

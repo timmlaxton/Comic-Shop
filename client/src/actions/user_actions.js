@@ -6,7 +6,8 @@ import {
         AUTH_USER,
         LOGOUT_USER,
         UPDATE_DATA_USER,
-        CLEAR_UPDATE_USER    
+        CLEAR_UPDATE_USER,
+        ORDER_USER,    
        
     } from './types';
     
@@ -21,16 +22,7 @@ import {
                 payload: request
             })
 
-        /*
-            axios.post(`${USER_SERVER}/register`,dataToSubmit)
-                .then(response => response.data)
-                .then(data => {
-                    dispatch({
-                        type: REGISTER_USER,
-                        payload: data
-                    })
-                })
-        */
+  
    }
 }
 
@@ -99,4 +91,17 @@ export function clearUpdateUser(){
         type: CLEAR_UPDATE_USER,
         payload: ''
     }
+}
+
+ export function orderUser(dataToSubmit){
+       return async dispatch => {  
+            const request = await axios.post(`${USER_SERVER}/standing_order`,dataToSubmit)
+                .then(response => response.data);
+            return dispatch ({
+                type: ORDER_USER,
+                payload: request
+            })
+
+  
+   }
 }

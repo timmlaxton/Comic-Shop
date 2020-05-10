@@ -17,6 +17,7 @@ import AddProduct from './components/User/Admin/add_product'
 import ManageCatergories from './components/User/Admin/manage_catergories';
 import UserCart from './components/User/cart';
 import UpdateProfile from './components/User/update_profile';
+import StandingOrder from './components/User/standing_order';
 import ManageSite from './components/User/Admin/manage_site';
 import ManageStock from'./components/User/Admin/manage_stock';
 
@@ -32,6 +33,7 @@ const Routes = () => {
       <Route path="/admin/add_product" exact component={Auth(AddProduct,true)}/>
       <Route path="/admin/manage_catergories" exact component={Auth(ManageCatergories,true)}/>
       <Route path="/user/user_profile" exact component={Auth(UpdateProfile,true)}/>
+      <Route path="/user/standing_order" exact component={Auth(StandingOrder,true)}/>
       <Route path="/admin/site_info" exact component={Auth(ManageSite,true)}/>
       <Route path="/admin/manage_stock" exact component={Auth(ManageStock,true)}/>
 

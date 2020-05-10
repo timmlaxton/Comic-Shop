@@ -12,6 +12,7 @@ export const SUB_QUANTITY = "sub_quantity_user";
 export const ADD_QUANTITY = "add_quantity";
 export const UPDATE_CART_DETAIL = 'update_cart_detail'
 export const SET_CART_ITEMS = 'set_cart_items'
+export const ORDER_USER = 'order_user'
 
 export const GET_NEW_ARRIVALS = 'get_new_arrivals';
 export const GET_BACK_ISSUES = 'get_back_issues';

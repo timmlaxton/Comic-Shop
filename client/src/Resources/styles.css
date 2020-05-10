@@ -528,16 +528,15 @@ footer .business_nfo .nfo {
 }
 
 .card_item_wrapper.grid_bars {
-    float: none;
-    width: 100%;
+    
     display: flex;
 }
 
 .card_item_wrapper.grid_bars .image {
-    width: 300px;
+    width: 1000px;
     height: 211px;
     border: none;
-    object-fit:scale-down !important;
+    display:flex;
 
 }
 
@@ -548,7 +547,7 @@ footer .business_nfo .nfo {
 
 .card_item_wrapper.grid_bars .description{
     clear:both;
-    padding: 0px 25px;
+    display: flex;
     border-top: 1px solid #eeeeee;
 }
 

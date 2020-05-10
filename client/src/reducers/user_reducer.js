@@ -5,6 +5,8 @@ import {
     LOGOUT_USER,
     UPDATE_DATA_USER,
     CLEAR_UPDATE_USER,
+    ORDER_USER
+
     
 
 } from '../actions/types';
@@ -28,6 +30,8 @@ export default function(state=initialState,action){
         case UPDATE_DATA_USER:
             return{...state,updateUser: action.payload}
         case CLEAR_UPDATE_USER:
+            return{...state,updateUser: action.payload}
+        case ORDER_USER:
             return{...state,updateUser: action.payload}
         default:
             return state;
