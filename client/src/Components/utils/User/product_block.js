@@ -30,9 +30,9 @@ const UserProductBlock = ({
             </div>
             <div className="item">
               <h4>Item</h4>
-              <div>
+              <div classname="No_stock">
                 {product.name}{" "}
-                {product._id in outOfStock ? <p>not in stock</p> : null}
+                {product._id in outOfStock ? <p>This item is currently unavailable</p> : null}
               </div>
             </div>
             <div className="item">

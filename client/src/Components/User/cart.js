@@ -16,14 +16,13 @@ class UserCart extends Component {
     state ={
         loading: true,
         total:0,
+        shipping:4,
         showTotal: false,
         showSuccess: false,
         outOfStock: {}
     }
 
     componentDidMount(){
-        // var cartItems = [];
-        // var user = this.props.user;
         const {cart} = this.props
         console.log('in card on mount', this)
 
@@ -55,10 +54,11 @@ class UserCart extends Component {
     }
 
     calculateTotal = (cartDetail) => {
-        var total = 0;
+        var total = 4;
+      
 
         cartDetail.forEach(item=>{
-            total = (total + parseFloat(item.price) * item.quantity)            
+            total = (total + parseFloat(item.price) * item.quantity)         
         });
 
         this.setState({
@@ -204,6 +204,7 @@ class UserCart extends Component {
                         { this.state.showTotal ?
                             <div>
                                 <div className="user_cart_sum">
+                                    <div> + Shipping: £4.00</div>
                                     <div>
                                         Total amount: £ {this.state.total}
                                     </div>
