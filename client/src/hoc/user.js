@@ -30,6 +30,10 @@ const admin = [
     {
         name: 'Manage catergories',
         linkTo: "/admin/manage_catergories"
+    },
+    {
+        name: 'Manage stock',
+        linkTo: "/admin/manage_stock"
     }
 ]
 

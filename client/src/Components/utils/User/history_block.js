@@ -11,7 +11,8 @@ const UserHistoryBlock = (props) => {
             <td>{moment(product.dateOfPurchase).format("MM-DD-YYYY")}</td>
             <td> {product.name}</td>
             <td>£ {product.price}</td>
-            <td>{product.quantity}</td>
+           
+           
 
             </tr>
         ))
@@ -28,7 +29,7 @@ const UserHistoryBlock = (props) => {
                         <th>Date of Purchase</th>
                         <th>Product</th>
                         <th>Price paid</th>
-                        <th>Quantity</th>
+                        
                     </tr>
                 </thead>
                 <tbody>

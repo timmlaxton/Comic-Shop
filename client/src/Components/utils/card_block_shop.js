@@ -18,7 +18,7 @@ const CardBlockShop = (props) => {
     return (
         <div className="card_block_shop">
             <div>
-                <div>
+                <div className="card_block_container">
                     {props.list ?
                         props.list.length === 0 ?
                             <div className="no_result">

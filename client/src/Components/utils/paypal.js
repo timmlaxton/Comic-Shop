@@ -2,9 +2,30 @@ import React, { Component } from 'react';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 class Paypal extends Component {
+
+    state = {
+        showPaypal: false
+    }
+
+    componentDidMount() {
+        const paypalBtn = document.querySelector('.paypal-button')
+        console.log('paypal btn', paypalBtn)
+    }
+
+
+    onPaypalClick = () => {
+        console.log('on paypad')
+    }
+
+    showPaypal = () => {
+        this.setState({
+            showPaypal: true
+        })
+
+        this.props.checkStock()
+    }
+
     render() {
-
-
         const onSuccess = (payment) => {
             //console.log(JSON.stringify(payment));     
 
@@ -29,17 +50,12 @@ class Paypal extends Component {
 
         }
 
-
-
-
-
         const onCancel = (data) => {
             console.log(JSON.stringify(data))
         }
 
         const onError = (err) => {
             console.log(JSON.stringify(err))
-
         }
 
         var env = 'sandbox';
@@ -53,10 +69,10 @@ class Paypal extends Component {
 
 
 
-
         return (
             <div>
-                <PaypalExpressBtn
+                {this.state.showPaypal ? (
+                    <PaypalExpressBtn
                     env={env}
                     client={client}
                     currency={currency}
@@ -72,6 +88,9 @@ class Paypal extends Component {
                     }}
                 
                 />
+                ) : (
+                    <button onClick={this.showPaypal}>Continue</button>
+                )}
             </div>
         );
     }

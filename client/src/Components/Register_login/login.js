@@ -73,6 +73,7 @@ class Login extends Component {
         }
 
         submitForm = (event) => {
+            console.log('submitting form')
             event.preventDefault();
 
             var dataToSubmit = generateData(this.state.formdata, 'login');
@@ -91,18 +92,18 @@ class Login extends Component {
     render() {
         return (
             <div className="sigin_wrapper">
-                <form onSubmit={(event)=> this.submitForm(event)}>
+                <form onSubmit={this.submitForm}>
 
             <FormField
-            id={'email'}
-            formdata={this.state.formdata.email}
-            change={(element)=> this.updateForm(element)}
+                id={'email'}
+                formdata={this.state.formdata.email}
+                change={this.updateForm}
             />
 
             <FormField
             id={'password'}
             formdata={this.state.formdata.password}
-            change={(element) => this.updateForm(element)}
+            change={this.updateForm}
 
             />
 
@@ -113,7 +114,7 @@ class Login extends Component {
             :null}
 
 
-            <button onClick={(event) => this.submitForm(event)}>
+            <button onClick={this.submitForm}>
                 Sign in
             </button>
               </form>  

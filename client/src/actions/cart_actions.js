@@ -81,35 +81,40 @@ export function updateCartDetail(payload) {
 
 
 export function removeCartItem(id){
+    return async (dispatch, getState) => {
+        const {cart} = getState()
+        const cartItems = cart.cartItems.filter(item => item.id !== id)
+        const cartDetail = cart.cartDetail.filter(item => item._id !== id)
+        console.log('data?', cartItems, cartDetail, cart)
+        // Use DELETE request instead of GET when you want to delete some data
+        // Also, add error handling
+        const response = await axios.post(`${PRODUCT_SERVER}/update_cart`, {
+            cart: cartItems
+        })
+        console.log('response', response)
+        
 
-    const request = axios.get(`${USER_SERVER}/removeFromCart?_id=${id}`)
-                    .then(response => {
-
-                        response.data.cart.forEach(item=>{
-                            response.data.cartDetail.forEach((k,i)=>{
-                                if(item.id === k._id){
-                                    response.data.cartDetail[i].quantity = item.quantity;
-                                }
-                            })
-                        })
-                            return response.data;
-                    })
-
-    return {
-        type: REMOVE_CART_ITEM_USER,
-        payload: request
+        return dispatch({
+            type: REMOVE_CART_ITEM_USER,
+            payload: {
+                cart: cartItems,
+                cartDetail
+            }
+        })
     }
+   
 
 }
 
 export function onSuccessBuy(data){
-
-
-    const request = axios.post(`${USER_SERVER}/successBuy`, data)
-        .then(response => response.data);
-
-    return {
-        type: ON_SUCCESS_BUY_USER,
-        payload: request
+    return async dispatch => {
+        const response = await axios.post(`${USER_SERVER}/successBuy`, data)
+        console.log('on success response', response)
+        return dispatch({
+            type: ON_SUCCESS_BUY_USER,
+            payload: response.data
+        })
     }
+
+   
 }

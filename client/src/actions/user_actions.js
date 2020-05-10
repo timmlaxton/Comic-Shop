@@ -5,28 +5,36 @@ import {
         REGISTER_USER,
         AUTH_USER,
         LOGOUT_USER,
-        ADD_TO_CART_USER,
-        GET_CART_ITEMS_USER,
-        REMOVE_CART_ITEM_USER,
-        SUB_QUANTITY,
-        ADD_QUANTITY,
-        ON_SUCCESS_BUY_USER,
         UPDATE_DATA_USER,
         CLEAR_UPDATE_USER    
        
     } from './types';
     
-    import { USER_SERVER, PRODUCT_SERVER}  from '../components/utils/misc'
+    import { USER_SERVER}  from '../components/utils/misc'
     
     export function registerUser(dataToSubmit){
-        const request = axios.post(`${USER_SERVER}/register`,dataToSubmit)
-        .then(response => response.data);
-    
-        return {
-            type: REGISTER_USER,
-            payload: request
-        }
-    }
+       return async dispatch => {  
+            const request = await axios.post(`${USER_SERVER}/register`,dataToSubmit)
+                .then(response => response.data);
+            return dispatch ({
+                type: REGISTER_USER,
+                payload: request
+            })
+
+        /*
+            axios.post(`${USER_SERVER}/register`,dataToSubmit)
+                .then(response => response.data)
+                .then(data => {
+                    dispatch({
+                        type: REGISTER_USER,
+                        payload: data
+                    })
+                })
+        */
+   }
+}
+
+      
     
     export async function loginUser(dataToSubmit){
         return async dispatch => {
@@ -42,14 +50,10 @@ import {
 
    
 export function auth(user){
-    console.log('in auth action', user)
-    return {
-        type: AUTH_USER,
-        payload: user
-    }
     return async dispatch => {
         const response = await axios.get(`${USER_SERVER}/auth`)
         console.log('auth response', response)
+        
         return dispatch({
             type: AUTH_USER,
             payload: response.data
@@ -58,30 +62,37 @@ export function auth(user){
 }
 
 
-export function logoutUser(){
-    const request = axios.get(`${USER_SERVER}/logout`)
-    .then(response => response.data);
-
-
-    return {
-        type:LOGOUT_USER,
-        payload: request
+export function logoutUser(user){
+    console.log('logout user');
+    return async dispatch => {
+        const request = await axios.get(`${USER_SERVER}/logout`)
+        .then(response => response.data);
+    
+    
+        return dispatch ({
+            type:LOGOUT_USER,
+            payload: request
+        })
+    } 
     }
-}
+    
 
 export function updateDataUser(dataToSubmit){
-    const request = axios.post(`${USER_SERVER}/update_profile`, dataToSubmit)
-    .then(response => {
-        console.log('updating user data', response)
-        return response.data
-    });
-
-    return {
-        type: UPDATE_DATA_USER,
-        payload: request
+    return async dispatch => {
+        const request = await axios.post(`${USER_SERVER}/update_profile`, dataToSubmit)
+        .then(response => {
+            console.log('updating user data', response)
+            return response.data
+        });
+    
+        return dispatch({
+            type: UPDATE_DATA_USER,
+            payload: request
+        })
+    
     }
-
-}
+    }
+   
 
 export function clearUpdateUser(){
     return {

@@ -3,7 +3,7 @@ import UserLayout from '../../hoc/user';
 import UserProductBlock from '../utils/User/product_block';
 import axios from 'axios'
 import {connect} from 'react-redux';
-import {getCartItems, removeCartItem, onSuccessBuy, subQuantity, addQuantity, updateCartDetail } from '../../actions/cart_actions'
+import { removeCartItem, onSuccessBuy, subQuantity, addQuantity, updateCartDetail } from '../../actions/cart_actions'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import faFrown from '@fortawesome/fontawesome-free-solid/faFrown'
@@ -18,26 +18,18 @@ class UserCart extends Component {
         total:0,
         showTotal: false,
         showSuccess: false,
+        outOfStock: {}
     }
 
     componentDidMount(){
-        //var cartItems = [];
-        var user = this.props.user;
+        // var cartItems = [];
+        // var user = this.props.user;
         const {cart} = this.props
         console.log('in card on mount', this)
 
         if (!cart.cartItems || !cart.cartItems.length) return
-
-        /*cart.forEach(item=>{
-            cartItems.push(item.id)
-        });*/
         this.fetchCartItems(cart.cartItems)
-        /*this.props.dispatch(getCartItems(cartItems, user.userData.cart))
-        .then(()=>{
-            if(this.props.user.cartDetail.length > 0){
-                this.calculateTotal(this.props.user.cartDetail)
-            }
-        })*/
+        
     }
 
     fetchCartItems = async (cartItems)  => {
@@ -55,6 +47,7 @@ class UserCart extends Component {
             console.log('updated quantity', response.data)
             this.props.updateCartDetail(response.data)
             this.calculateTotal(this.props.cart.cartDetail)
+            this.checkStock()
 
         } catch (error) {
             console.error(error)
@@ -65,12 +58,11 @@ class UserCart extends Component {
         var total = 0;
 
         cartDetail.forEach(item=>{
-            total += parseFloat(item.price).toFixed(2) * item.quantity
-            
+            total = (total + parseFloat(item.price) * item.quantity)            
         });
 
         this.setState({
-            total,
+            total: total.toFixed(2),
             showTotal: true
         });
 
@@ -140,7 +132,7 @@ class UserCart extends Component {
 
 
             const payload = this.props.cart.cartDetail.map(item => {
-                if (item._id == product._id) {
+                if (item._id === product._id) {
                     return {
                         ...product,
                         quantity
@@ -153,7 +145,7 @@ class UserCart extends Component {
             this.props.dispatch(updateCartDetail(payload))
 
             const serverPayload = this.props.cart.cartItems.map(item => {
-                if (item.id == product._id) {
+                if (item.id === product._id) {
                     return {
                         ...item,
                         quantity
@@ -163,20 +155,39 @@ class UserCart extends Component {
                 return item
             })
             this.calculateTotal(payload)
-            const response = await axios.post(`${PRODUCT_SERVER}/update_quantity`, {
-                productId: product._id,
+            const response = await axios.post(`${PRODUCT_SERVER}/set_cart`, {
                 cart: serverPayload,
-                // userId: this.props.user.userId,
-                quantity
             })
             console.log('response', response)
         } catch(error) {
             console.error(error)
         }
     }
+
+    checkStock = async() => {
+        console.log('checking stock')
+        this.setState({
+            outOfStock: {}
+        })
+        try {
+            const response = await axios.post(`${PRODUCT_SERVER}/check_stock_available`, {
+                data: this.props.cart.cartItems
+            })
+            console.log('response?', response)
+            let obj = {}
+            response.data.forEach(({isAvailable, id}) => {
+                    if (!isAvailable) obj[id] = true
+            }) 
+            this.setState({
+                outOfStock: obj
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
     
     render() {
-        console.log('in cart js', this.props.cart)
+        console.log('in cart js', this.props.cart, this.state)
         return (
             <UserLayout>
                 <div>
@@ -186,7 +197,8 @@ class UserCart extends Component {
                             products={this.props.cart}
                             type="cart"
                             removeItem={this.removeFromCart}     
-                            updateQuantity={this.updateQuantity}                       
+                            updateQuantity={this.updateQuantity}     
+                            outOfStock={this.state.outOfStock}                  
                         />
                         
                         { this.state.showTotal ?
@@ -220,11 +232,11 @@ class UserCart extends Component {
                         this.state.showTotal ?
                         <div className="paypal_button_container">
                             <Paypal
-                            toPay={this.state.total}
-                            transactionError={(data)=> this.transactionError(data)}
-                            transactionCancel={(data)=> this.transactionCancel(data)}
-                            onSuccess={(data)=> this.transactionSuccess(data)}
-                            
+                                toPay={this.state.total}
+                                transactionError={(data)=> this.transactionError(data)}
+                                transactionCancel={(data)=> this.transactionCancel(data)}
+                                onSuccess={(data)=> this.transactionSuccess(data)}   
+                                checkStock={this.checkStock}                         
                             />
                         </div>
                         :null

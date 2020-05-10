@@ -11,7 +11,6 @@ export default function(ComposedClass,reload,adminRoute = null){
         state = {
             loading: true
         }
-
         async componentDidMount(){
             try {
                 console.log('in auth.js componentDidMount')
@@ -26,10 +25,10 @@ export default function(ComposedClass,reload,adminRoute = null){
                     this.props.dispatch(auth(user))
                     this.props.dispatch(setCartItems(user.cart))
                     if(adminRoute && !user.isAdmin){
-                        this.props.history.push('/user_dashboard')
+                        this.props.history.push('/user/dashboard')
                     }else{
                         if(reload === false){
-                            this.props.history.push('/user_dashboard')
+                            this.props.history.push('/user/dashboard')
                         }
                     }
                 }
@@ -39,29 +38,29 @@ export default function(ComposedClass,reload,adminRoute = null){
             }
             this.setState({loading:false})
 
-            /*
-            this.props.dispatch(auth()).then(response => {
-                var user = this.props.user.userData;                
+            // /*
+            // this.props.dispatch(auth()).then(response => {
+            //     var user = this.props.user.userData;                
                 
-                if(!user.isAuth){
-                    if(reload){
-                        this.props.history.push('/register_login')
-                    }
-                }else{
-                    if(adminRoute && !user.isAdmin){
-                        this.props.history.push('/user_dashboard')
-                    }else{
-                        if(reload === false){
-                            this.props.history.push('/user_dashboard')
+            //     if(!user.isAuth){
+            //         if(reload){
+            //             this.props.history.push('/register_login')
+            //         }
+            //     }else{
+            //         if(adminRoute && !user.isAdmin){
+            //             this.props.history.push('/user/dashboard')
+            //         }else{
+            //             if(reload === false){
+            //                 this.props.history.push('/user/dashboard')
 
-                    }
-                }
-            }*/        
+            //         }
+            //     }
+            // }*/        
         }
 
 
         render() {
-            console.log('in auth render', this.state.loading)
+            console.log('in auth render', this.state, this.props)
             if(this.state.loading){
                 return (
                     <div className="main_loader">
@@ -69,20 +68,18 @@ export default function(ComposedClass,reload,adminRoute = null){
                     </div>
                 )
             }
-            return (
-                <ComposedClass {...this.props} user={this.props.user}/>
-            );
+            return this.props.user.userData ? (<ComposedClass {...this.props} user={this.props.user}/>) : null      
+            
         }
     }
 
-function mapStateToProps(state){
-    return {
-        user: state.user
+    function mapStateToProps(state){
+        return {
+            user: state.user
+        }
     }
-}
 
     return connect(mapStateToProps)(AuthenticationCheck)
-    
 
 }
 

@@ -59,7 +59,7 @@ export function getNewArrivals(){
 
 export function getBackIssues(){
 
-    const request = axios.get(`${PRODUCT_SERVER}/articles?sortBy=sold&order=desc&limit=4`)
+    const request = axios.get(`${PRODUCT_SERVER}/articles?sortBy=sold&order=desc&limit=4&filterBy=catergory:5ea1c282f7505a220c5dd84f`)
             .then(response => response.data)
 
             return {

@@ -60,7 +60,7 @@ state = {
     logoutHandler = () => {
         this.props.dispatch(logoutUser()).then(response =>{
             if(response.payload.success){
-                this.props.history.push('/')
+                this.props.history.push('/register_login')
             }
         })
     }
@@ -86,7 +86,7 @@ state = {
         item.name === 'Log out' ?
         <div className="log_out_link"
         key={i}
-        onClick={()=> this.logoutHandler()}
+        onClick={this.logoutHandler}
         >
             {item.name}
         </div>
@@ -128,13 +128,14 @@ state = {
             
         })
 
-
     }
 
 
 
 
+
     render() {
+        console.log('in header', this.state, this.props)
         return (
             <header className="bck_b_light">
                 <div className="container">

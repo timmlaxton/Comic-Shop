@@ -42,7 +42,7 @@ const ProdNfo = (props) => {
 
     const showProdActions = (detail) => (
         <div className="product_actions">
-            <div className="price">$ { detail.price }</div>
+            <div className="price">£ { detail.price }</div>
             <div className="cart">
                 <MyButton
                     type="add_to_cart_link"
