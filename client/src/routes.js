@@ -6,8 +6,8 @@ import Layout from './hoc/layout'
 
 import Comics from './components/Shop/comics'
 import Shirts from './components/Shop/shirts'
-import Home from './components/register_login';
-import RegisterLogin from './components/register_login';
+import Home from './components/Home';
+import RegisterLogin from './components/Register_login';
 import Register from './components/Register_login/register';
 import ProductPage from './components/Product';
 
