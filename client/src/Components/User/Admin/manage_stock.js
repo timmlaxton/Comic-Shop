@@ -37,13 +37,13 @@ const Managestock = (props) => {
 
     useEffect(() => {
         _fetchProducts(page, showOutOfStock)
-    }, [page])
+    }, [page, showOutOfStock])
     console.log('props in manage stock', props)
     const renderBlocks = (products) => (
 
         products.length ?
         products.map((product,i)=> {
-            console.log('product?', product.amount, product.amount == 0, product)
+            //console.log('product?', product.amount, product.amount == 0, product)
             return (
                 <tr key={i} className={`${product.amount < 1 ? 'out-of-stock' : ''}`}>
                 <td>{moment(product.dateOfPurchase).format("MM-DD-YYYY")}</td>
@@ -68,7 +68,6 @@ const Managestock = (props) => {
     const _onToggleOutOfStock = e => {
         const newValue = !showOutOfStock
         setShowOutOfStock(newValue)
-        _fetchProducts(page, newValue)
     }
     
     return (

@@ -32,7 +32,7 @@ export default function(state=initialState,action){
         case CLEAR_UPDATE_USER:
             return{...state,updateUser: action.payload}
         case ORDER_USER:
-            return{...state,updateUser: action.payload}
+            return{...state, orderSuccess: action.payload}
         default:
             return state;
     }

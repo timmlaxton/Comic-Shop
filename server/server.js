@@ -34,8 +34,9 @@ const {Product} = require('./models/product');
 const {Character} = require('./models/character');
 const {Catergory} = require('./models/catergory');
 const {Shirt} = require('./models/shirt');
-const {Payment} =require('./models/payment');
-const {Site} =require ('./models/site');
+const {Payment} = require('./models/payment');
+const {Site} = require ('./models/site');
+const {Standing} = require('./models/standing')
 
 
 
@@ -580,6 +581,20 @@ app.post('/api/site/site_data',auth,admin,(req,res)=>{
     )
 })
 
+// standing order
+
+app.post('/api/users/standing_order',(req,res)=>{
+    const standing = new Standing(req.body);
+
+    standing.save((err,doc)=>{
+        if(err) return res.json({success:false,err})
+        res.status(200).json({
+            success: true,
+            userdata: doc
+            
+        })
+    })
+});
 
 const port = process.env.PORT || 3002;
 app.listen(port,()=>{

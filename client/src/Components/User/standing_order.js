@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import FormField from '../utils/Form/formfield';
 import UserLayout from '../../hoc/user';
-import { update, generateData, isFormValid, populateFields } from '../utils/Form/formActions';
+import { update, generateData, isFormValid } from '../utils/Form/formActions';
 
  
 
 import { connect } from 'react-redux';
+import {orderUser} from '../../actions/user_actions'
 
-
-class standing_order extends Component {
+class Standing_order extends Component {
     state = {
         formError: false,
         formSuccess:false,
@@ -97,7 +97,7 @@ class standing_order extends Component {
 }       
 
 updateForm = (element) => {
-    const newFormdata = update(element,this.state.formdata,'standing_order');
+    const newFormdata = update(element,this.state.formdata,'/standing_order');
     this.setState({
         formError: false,
         formdata: newFormdata
@@ -107,16 +107,35 @@ updateForm = (element) => {
 submitForm = (event) =>{
     event.preventDefault();
     
-    let orderUser = generateData(this.state.formdata,'standing_order');
+    let dataToSubmit = generateData(this.state.formdata,'standing_order');
     let formIsValid = isFormValid(this.state.formdata,'standing_order')
-
+    console.log('formIsValid', formIsValid)
+    
     if(formIsValid){
-        console.log(orderUser);
-        this.setState({
-            formError: true
-        })
+        this.props.dispatch(orderUser(dataToSubmit))
+        .then(response =>{ 
+            console.log('response?', response)
+            if(response.payload.success){
+                this.setState({
+                    formError: false,
+                    formSuccess: true
+                });
+                setTimeout(()=>{
+                    this.props.history.push('/');
+                },3000)
+               } else {
+                    this.setState({formError: true})
+                }
+            }).catch(e => {
+                this.setState({formError: true})
+            })
+        } else {
+            this.setState({
+                formError: true
+            })
+        }
     }
-}
+
 
 
 
@@ -159,18 +178,21 @@ render() {
                 />
 
 <div>
+                            {
+                            this.state.formError ?
+                             <div className="error_label">
+                            Please fill in all your details
+                             </div>
+                            :null
+                            }      
                         {
                             this.state.formSuccess ? 
                             <div className="form_success">
-                                Success
+                                Your order has been submitted
                             </div>
                             :null
                         }
-                        {this.state.formError ?
-                            <div className="error_label">
-                                Please check your data
-                                        </div>
-                            : null}
+                        
                         <button onClick={(event) => this.submitForm(event)}>
                            Submit Standing Order
                         </button>
@@ -188,4 +210,4 @@ render() {
         
 
 
-export default connect()(standing_order);
+export default connect()(Standing_order);
