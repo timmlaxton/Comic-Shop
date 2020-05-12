@@ -4,8 +4,8 @@ import {Switch, Route} from 'react-router-dom';
 import Auth from './hoc/auth';
 import Layout from './hoc/layout'
 
-import Comics from './components/Shop/comics'
-import Shirts from './components/Shop/shirts'
+import Comics from './components/Shop/comics';
+import Shirts from './components/Shop/shirts';
 import Home from './components/Home';
 import RegisterLogin from './components/Register_login';
 import Register from './components/Register_login/register';
