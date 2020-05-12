@@ -6,9 +6,9 @@ const HomePromotion = (props) => {
     const order = {
         img: 'images/featured/pull.jpg',
         lineOne: 'Standing Order',
-        lineTwo: 'Click on the link above to find out how to start one today',
-        linkTitle: 'Subscribe Now',
-        linkTo: '/shop'
+        lineTwo: 'Register an accoutn to start one today',
+        linkTitle: 'Register Account',
+        linkTo: '/register_login'
     }
 
     const standingOrder = () => (

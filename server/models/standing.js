@@ -11,6 +11,21 @@ const standingSchema = mongoose.Schema({
         type: 'String',
         maxlength:100
     },
+    address:{
+        required: true,
+        type: String,
+        maxlength:1000
+    },
+    city:{
+        required: true,
+        type: String,
+        maxlength:100
+    },
+    postcode:{
+        required: true,
+        type: String,
+        maxlength:100
+    },
     email: { 
         required: true,
         type: String,

@@ -72,7 +72,7 @@ const Footer = ({data}) => {
             <h2> Join our mailing list for the latest comics</h2>
             <div>
                 <div>
-                WHAT WOULD YOU LIKE WRITTEN HERE
+                The largest stockist of Silver and Bronze age comics in Scotland. 
                 </div>
 
             </div>

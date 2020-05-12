@@ -43,6 +43,51 @@ class Standing_order extends Component {
                 touched: false,
                 validationMessage:''
             },
+            address: {
+                element: 'input',
+                value: '',
+                config:{
+                        name:'address_input',
+                        type:'text',
+                        placeholder:'Enter your address'
+            },
+                validation:{
+                    required: true
+                },
+                valid: false,
+                touched: false,
+                validationMessage:''
+            },
+            city: {
+                element: 'input',
+                value: '',
+                config:{
+                        name:'city_input',
+                        type:'text',
+                        placeholder:'Enter your city'
+            },
+                validation:{
+                    required: true
+                },
+                valid: false,
+                touched: false,
+                validationMessage:''
+            },
+            postcode: {
+                element: 'input',
+                value: '',
+                config:{
+                        name:'postcode_input',
+                        type:'text',
+                        placeholder:'Enter your postcode'
+            },
+                validation:{
+                    required: true
+                },
+                valid: false,
+                touched: false,
+                validationMessage:''
+            },
             email: {
                 element: 'input',
                 value: '',
@@ -156,6 +201,24 @@ render() {
                 <FormField
                     id={'surname'}
                     formdata={this.state.formdata.surname}
+                    change={(element) => this.updateForm(element)}
+                />
+
+                <FormField
+                    id={'address'}
+                    formdata={this.state.formdata.address}
+                    change={(element) => this.updateForm(element)}
+                />
+
+                <FormField
+                    id={'city'}
+                    formdata={this.state.formdata.city}
+                    change={(element) => this.updateForm(element)}
+                />
+
+                <FormField
+                    id={'postcode'}
+                    formdata={this.state.formdata.postcode}
                     change={(element) => this.updateForm(element)}
                 />
 

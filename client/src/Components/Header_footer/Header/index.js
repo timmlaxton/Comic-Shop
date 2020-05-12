@@ -23,12 +23,12 @@ state = {
             
         },
         
-        {
-            name: "Shirts",
-            linkTo:'/shirts',
-            public: true
+        // {
+        //     name: "Shirts",
+        //     linkTo:'/shirts',
+        //     public: true
             
-        },
+        // },
     ],
     user:[
         {
