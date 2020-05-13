@@ -12,7 +12,7 @@ import Register from './components/Register_login/register';
 import ProductPage from './components/Product/product';
 
 
-import UserDashboard from './components/User';
+import UserDashboard from './components/User/user';
 import AddProduct from './components/User/Admin/add_product'
 import ManageCatergories from './components/User/Admin/manage_catergories';
 import UserCart from './components/User/cart';
