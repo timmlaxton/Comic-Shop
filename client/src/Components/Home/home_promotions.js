@@ -1,5 +1,5 @@
-import React from './node_modules/react';
-import MyButton from '../utils/button'
+import React from 'react';
+import MyButton from '../utils/button';
 
 const HomePromotion = (props) => {
 
