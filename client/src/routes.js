@@ -4,7 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 import Auth from './hoc/auth';
 import Layout from './hoc/layout'
 
-import Comics from './components/Shop/comics';
+import Comics from './components/Shop/comics/comics';
 import Shirts from './components/Shop/shirts';
 import Home from './components/Home/home';
 import RegisterLogin from './components/Register_login/register_login';
