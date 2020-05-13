@@ -5,7 +5,7 @@ import Auth from './hoc/auth';
 import Layout from './hoc/layout'
 
 import Comics from './components/Shop/comics';
-import Home from './components/Home';
+import Home from './components/Home/index';
 import RegisterLogin from './components/Register_login';
 import Register from './components/Register_login/register';
 import ProductPage from './components/Product';
