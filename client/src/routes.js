@@ -5,7 +5,6 @@ import Auth from './hoc/auth';
 import Layout from './hoc/layout'
 
 import Comics from './components/Shop/comics/comics';
-import Shirts from './components/Shop/shirts';
 import Home from './components/Home/home';
 import RegisterLogin from './components/Register_login/register_login';
 import Register from './components/Register_login/register';
@@ -45,7 +44,6 @@ const Routes = () => {
       <Route path="/register" exact component={Register}/>
       <Route path="/" exact component={Auth(Home,null)}/>
       <Route path="/comics" exact component={Auth(Comics,null)}/>
-      <Route path="/shirts" exact component={Auth(Shirts,null)}/>
       
 
 
