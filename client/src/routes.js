@@ -9,7 +9,7 @@ import Shirts from './components/Shop/shirts';
 import Home from './components/Home/home';
 import RegisterLogin from './components/Register_login/register_login';
 import Register from './components/Register_login/register';
-import ProductPage from './components/Product';
+import ProductPage from './components/Product/product';
 
 
 import UserDashboard from './components/User';
