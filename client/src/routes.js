@@ -4,11 +4,11 @@ import {Switch, Route} from 'react-router-dom';
 import Auth from './hoc/auth';
 import Layout from './hoc/layout'
 
-import Comics from './components/Shop/comics';
+import Comics from './components/Shop/comics/index';
 import Home from './components/Home/index';
-import RegisterLogin from './components/Register_login';
+import RegisterLogin from './components/Register_login/index';
 import Register from './components/Register_login/register';
-import ProductPage from './components/Product';
+import ProductPage from './components/Product/index';
 
 
 import UserDashboard from './components/User/user';
