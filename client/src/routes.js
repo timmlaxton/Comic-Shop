@@ -8,7 +8,7 @@ import Comics from './components/Shop/comics';
 import Home from './components/Home';
 import RegisterLogin from './components/Register_login';
 import Register from './components/Register_login/register';
-import ProductPage from './components/Product/product';
+import ProductPage from './components/Product';
 
 
 import UserDashboard from './components/User/user';
